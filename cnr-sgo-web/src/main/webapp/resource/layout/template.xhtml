@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>CNR Sistemas</title>
+</h:head>
+<h:body>
+	<ui:insert name="menu">
+		<p:dock position="bottom">
+		<p:menuitem value="Home" icon="/resource/images/home.png" url="/index.xhtml"></p:menuitem>
+		<p:menuitem value="Cadastros" icon="/resource/images/search.jpg" url="/pages/cadastro/menuCadastro.xhtml"></p:menuitem>
+		<p:menuitem value="Finanças" icon="/resource/images/build.jpg" url="/pages/financas/menuFinancas.xhtml"></p:menuitem>
+		<p:menuitem value="Orçamento" icon="/resource/images/searchpeople.jpg" url="/pages/operacional/menuOperacional.xhtml"></p:menuitem>
+		<p:menuitem value="Compras" icon="/resource/images/people.jpg" url="/pages/compras/menuCompras.xhtml"></p:menuitem>
+		<p:menuitem value="Gerencial" icon="/resource/images/addoffice.jpg" url="/pages/gerencial/menuGerencial.xhtml"></p:menuitem>
+		<p:menuitem value="Relatórios" icon="/resource/images/addpeople.jpg" url="/pages/relatorios/menuRelatorios.xhtml"></p:menuitem>
+	</p:dock>
+	</ui:insert>
+	
+	<p:messages id="messages"/>
+	
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+    <p:graphicImage value="/images/carregando.gif" width="100" />
+	</p:dialog>
+	
+	<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+	
+	<ui:insert name="corpo" />
+	
+</h:body>
+</html>
