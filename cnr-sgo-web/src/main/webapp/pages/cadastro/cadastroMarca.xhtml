@@ -7,5 +7,15 @@
 	template="/resource/layout/template.xhtml">
 	<ui:define name="corpo">
 		<h2>Aqui terá o formulario de cadastro das Marcas</h2>
+		
+		<p:dataTable value="#{cadastroMarcaMBean.marcas}" var="marcas">
+			<p:column headerText="ID">
+				<h:outputText value="#{marcas.id}" />
+			</p:column>
+			<p:column headerText="Nome">
+				<h:outputText value="#{marcas.nome}" />
+			</p:column>
+		</p:dataTable>
+		
 	</ui:define>
 </ui:composition>
