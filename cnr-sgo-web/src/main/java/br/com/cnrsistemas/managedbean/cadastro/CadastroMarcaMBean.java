@@ -6,7 +6,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import br.com.cnrsistemas.dao.administrativo.CadastrosBean;
 import br.com.cnrsistemas.model.administrativo.Marca;
 
 @ManagedBean
@@ -14,12 +13,17 @@ import br.com.cnrsistemas.model.administrativo.Marca;
 public class CadastroMarcaMBean {
 
 	
-	private CadastrosBean cadastroBean = new CadastrosBean();
 	private List<Marca> marcas;
 	
 	@PostConstruct
 	public void init(){
-		marcas = cadastroBean.listarMarcas();
+		
+		for(int i = 0; 1 < 20; i++){
+			Marca marca = new Marca();
+			marca.setId(i);
+			marca.setNome("Marca x" + i);
+		}
+		
 	}
 
 	public List<Marca> getMarcas() {
