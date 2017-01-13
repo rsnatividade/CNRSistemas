@@ -2,7 +2,7 @@ package br.com.cnrsistemas;
 
 import java.util.List;
 
-import br.com.cnrsistemas.dao.administrativo.CadastrosBean;
+import br.com.cnrsistemas.bean.administrativo.CadastrosBean;
 import br.com.cnrsistemas.model.administrativo.Marca;
 
 public class Main {

@@ -1,4 +1,4 @@
-package br.com.cnrsistemas.dao.administrativo;
+package br.com.cnrsistemas.bean.administrativo;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,6 @@
 package br.com.cnrsistemas.managedbean.cadastro;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -18,10 +19,14 @@ public class CadastroMarcaMBean {
 	@PostConstruct
 	public void init(){
 		
-		for(int i = 0; 1 < 20; i++){
+		marcas = new ArrayList<Marca>();
+		
+		for(int i = 0; i < 20; i++){
 			Marca marca = new Marca();
 			marca.setId(i);
 			marca.setNome("Marca x" + i);
+			
+			marcas.add(marca);
 		}
 		
 	}

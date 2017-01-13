@@ -1,4 +1,4 @@
-package br.com.cnrsistemas.dao.seguranca;
+package br.com.cnrsistemas.bean.seguranca;
 
 import javax.ejb.Stateless;
 
