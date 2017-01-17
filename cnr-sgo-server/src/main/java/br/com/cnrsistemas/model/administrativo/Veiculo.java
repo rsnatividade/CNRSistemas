@@ -27,6 +27,21 @@ public class Veiculo implements Serializable {
 	@Column(name="tx_descricao")
 	private String descricao;
 	
+	@Column(name="tx_placa")
+	private String placa;
+	
+	@Column(name="tx_cor")
+	private String cor;
+	
+	@Column(name="ano_fabricacao")
+	private int ano_fabricacao;
+	
+	@Column(name="ano_modelo")
+	private int ano_modelo;
+	
+	@Column(name="tx_combustivel")
+	private String combustivel;
+	
 	@ManyToOne
 	@JoinColumn(name="id_modelo")
 	private Modelo modelo;
@@ -58,6 +73,36 @@ public class Veiculo implements Serializable {
 	}
 	public void setOrcamentos(List<Orcamento> orcamentos) {
 		this.orcamentos = orcamentos;
+	}
+	public String getPlaca() {
+		return placa;
+	}
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+	public String getCor() {
+		return cor;
+	}
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+	public int getAno_fabricacao() {
+		return ano_fabricacao;
+	}
+	public void setAno_fabricacao(int ano_fabricacao) {
+		this.ano_fabricacao = ano_fabricacao;
+	}
+	public int getAno_modelo() {
+		return ano_modelo;
+	}
+	public void setAno_modelo(int ano_modelo) {
+		this.ano_modelo = ano_modelo;
+	}
+	public String getCombustivel() {
+		return combustivel;
+	}
+	public void setCombustivel(String combustivel) {
+		this.combustivel = combustivel;
 	}
 	
 }

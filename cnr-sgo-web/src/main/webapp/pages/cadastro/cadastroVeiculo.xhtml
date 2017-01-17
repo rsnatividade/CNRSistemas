@@ -6,6 +6,45 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/resource/layout/template.xhtml">
 	<ui:define name="corpo">
-		<h2>Aqui terá o formulario de cadastro das Marcas</h2>
+		<h2>Cadastro de Veículos</h2>
+		<h:form id="frmVeiculo">
+			<p:dataTable value="#{cadastroVeiculoMBean.veiculos}" var="veiculo" id="dtVeiculo"
+				paginator="true" rows="10" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+				<f:facet name="header">
+					<fieldset style="text-align: right; border: none;">
+						<p:commandButton icon="ui-icon-circle-plus"/>
+					</fieldset>
+				</f:facet>
+				<p:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{veiculo.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Placa</f:facet>
+					<h:outputText value="#{veiculo.placa}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Marca</f:facet>
+					<h:outputText value="#{veiculo.modelo.marca.nome}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Modelo</f:facet>
+					<h:outputText value="#{veiculo.modelo.nome}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Ano Fab./Mod.</f:facet>
+					<h:outputText value="#{veiculo.ano_fabricacao}/#{veiculo.ano_modelo}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Cor</f:facet>
+					<h:outputText value="#{veiculo.cor}" />
+				</p:column>
+				<p:column>
+					<p:commandButton icon="ui-icon-pencil"></p:commandButton>
+					<p:commandButton icon="ui-icon-circle-close"></p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>
