@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 public class ObjectDao {
 
@@ -14,13 +15,26 @@ public class ObjectDao {
 		this.em = em;
 	}
 	
+	@Transactional
 	public <T> T salvar(T object){
-		em.persist(object);
+		try{
+			em.getTransaction().begin();
+			em.persist(object);
+			em.getTransaction().commit();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 		return object;
 	}
 
 	public <T> void excluir(T object){
-		em.remove(object);
+		try{
+			em.getTransaction().begin();
+			em.remove(object);
+			em.getTransaction().commit();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 	}
 
 	public <T> T procurar(Class<T> classe, int id){
