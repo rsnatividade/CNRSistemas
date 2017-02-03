@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.cnrsistemas.dao.administrativo.AdministrativoSessionFacade;
 import br.com.cnrsistemas.model.administrativo.Marca;
 import br.com.cnrsistemas.model.administrativo.Modelo;
 import br.com.cnrsistemas.model.administrativo.Veiculo;
@@ -15,11 +16,18 @@ import br.com.cnrsistemas.model.administrativo.Veiculo;
 @ViewScoped
 public class CadastroVeiculoMBean {
 	
+	private AdministrativoSessionFacade admSession;
+	
 	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
+	private Veiculo veiculo;
 	
 	@PostConstruct
-	public void init(){
-		Marca marca = new Marca();
+	public void init(){		
+		admSession = new AdministrativoSessionFacade();
+		veiculos = admSession.listarVeiculosAtivos();
+		veiculo = new Veiculo();
+		
+         Marca marca = new Marca();
 		
 		marca.setId(1);
 		marca.setNome("Volkswagen");		
@@ -28,24 +36,13 @@ public class CadastroVeiculoMBean {
 		
 		modelo.setId(1);
 		modelo.setMarca(marca);
-		modelo.setNome("Fusca");				
+		modelo.setNome("Fuscao");
 		
-		Veiculo veiculo = new Veiculo();
-		
-		veiculo.setId(1);
-		veiculo.setModelo(modelo);
-		veiculo.setPlaca("ABC-1234");
-		veiculo.setCor("Preto");
-		veiculo.setCombustivel("Gasolina");
-		veiculo.setAno_modelo(69);
-		veiculo.setAno_fabricacao(69);
-		veiculo.setDescricao("Fumaceando");		
-		
-		veiculos.add(veiculo);
+		veiculo.setModelo(modelo);	
 	}
 	
 	public void incluirVeiculo(){
-		
+		admSession.salvarVeiculo(veiculo);
 	}
 	
 	public void editarVeiculo(Veiculo veiculo){
@@ -54,6 +51,14 @@ public class CadastroVeiculoMBean {
 	
 	public void excluirVeiculo(Veiculo veiculo){
 		
+	}
+	
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+	
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
 	}
 	
 	public List<Veiculo> getVeiculos() {

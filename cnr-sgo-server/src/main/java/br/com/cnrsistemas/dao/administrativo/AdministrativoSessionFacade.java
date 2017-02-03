@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import br.com.cnrsistemas.model.administrativo.Marca;
+import br.com.cnrsistemas.model.administrativo.Veiculo;
 
 public class AdministrativoSessionFacade {
 
@@ -25,5 +26,15 @@ public class AdministrativoSessionFacade {
 	public void salvarMarca(Marca marca){
 		MarcaDao marcaDao = new MarcaDao(em);
 		marcaDao.salvar(marca);
+	}
+	
+	public List<Veiculo> listarVeiculosAtivos() {
+		VeiculoDao veiculoDao = new VeiculoDao(em);
+		return veiculoDao.listarVeiculosAtivos();
+	}
+	
+	public void salvarVeiculo(Veiculo veiculo) {
+		VeiculoDao veiculoDao = new VeiculoDao(em);
+		veiculoDao.salvar(veiculo);
 	}
 }
