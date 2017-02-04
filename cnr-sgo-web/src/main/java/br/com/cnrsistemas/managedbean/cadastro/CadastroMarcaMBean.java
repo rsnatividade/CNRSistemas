@@ -27,6 +27,15 @@ public class CadastroMarcaMBean {
 
 	public void cadastrarMarca(){
 		administrativoSessionFacade.salvarMarca(marca);
+		marca = new Marca();
+	}
+	
+	public void selecionarMarca(Marca marca){
+		this.marca = marca;
+	}
+	
+	public void removerMarca(){
+		administrativoSessionFacade.removerMarca(this.marca);
 	}
 	
 	public List<Marca> getMarcas() {

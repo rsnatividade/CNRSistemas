@@ -28,6 +28,11 @@ public class AdministrativoSessionFacade {
 		marcaDao.salvar(marca);
 	}
 	
+	public void removerMarca(Marca marca){
+		MarcaDao marcaDao = new MarcaDao(em);
+		marcaDao.excluir(marca);
+	}
+	
 	public List<Veiculo> listarVeiculosAtivos() {
 		VeiculoDao veiculoDao = new VeiculoDao(em);
 		return veiculoDao.listarVeiculosAtivos();

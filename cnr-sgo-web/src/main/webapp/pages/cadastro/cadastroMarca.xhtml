@@ -11,7 +11,9 @@
 		<h:form id="frmMarcas">
 			<p:dataTable value="#{cadastroMarcaMBean.marcas}" var="marcas">
 				<f:facet name="header">
-					<p:commandButton icon="ui-icon-circle-plus" onclick="PF('dlgCadastroMarca').show()"></p:commandButton>
+					<fieldset style="text-align: right; border: none;">
+						<p:commandButton icon="ui-icon-circle-plus" onclick="PF('dlgCadastroMarca').show()" styleClass="botoes"></p:commandButton>
+					</fieldset>
 				</f:facet>
 				<p:column headerText="ID">
 					<h:outputText value="#{marcas.id}" />
@@ -20,8 +22,10 @@
 					<h:outputText value="#{marcas.nome}" />
 				</p:column>
 				<p:column>
-					<p:commandButton icon="ui-icon-pencil"></p:commandButton>
-					<p:commandButton icon="ui-icon-circle-close"></p:commandButton>
+					<p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlgCadastroMarca').show()"
+							action="#{cadastroMarcaMBean.selecionarMarca(marcas)}"></p:commandButton>
+					<p:commandButton icon="ui-icon-circle-close" oncomplete="PF('dlgConfirmarExclusao').show()"
+							action="#{cadastroMarcaMBean.selecionarMarca(marcas)}"></p:commandButton>
 				</p:column>
 			</p:dataTable>
 			
@@ -44,6 +48,14 @@
 			</p:dialog>
 		</h:form>
 		
+		<h:form id="frmDialogExclusao">
+			<p:confirmDialog id="dlgConfirmarExclusao" widgetVar="dlgConfirmarExclusao" closable="false"
+				message="Confirma a Exclusão da Marca?">
+				<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()" value="Cancelar" />
+				<p:commandButton oncomplete="PF('dlgConfirmarExclusao').hide()" value="Confirmar"
+						action="#{cadastroMarcaMBean.removerMarca()}"></p:commandButton>
+			</p:confirmDialog>
+		</h:form>
 	</ui:define>
 </ui:composition>
 
