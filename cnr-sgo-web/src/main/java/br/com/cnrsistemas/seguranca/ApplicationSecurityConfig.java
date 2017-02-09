@@ -14,9 +14,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Inject
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-		auth.inMemoryAuthentication()
-		.withUser("admin").password("admin").roles("ADMIN").and()
-		.withUser("op").password("op").roles("OP");
+		auth.authenticationProvider(new ApplicationSecurityProvider());
 	}
 	
 	protected void configure(HttpSecurity http) throws Exception{
