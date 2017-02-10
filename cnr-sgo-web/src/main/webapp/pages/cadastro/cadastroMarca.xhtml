@@ -22,10 +22,10 @@
 					<h:outputText value="#{marcas.nome}" />
 				</p:column>
 				<p:column>
-					<p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlgCadastroMarca').show()"
-							action="#{cadastroMarcaMBean.selecionarMarca(marcas)}"></p:commandButton>
+					<p:commandButton icon="ui-icon-pencil" ajax="true" oncomplete="PF('dlgCadastroMarca').show()"
+							actionListener="#{cadastroMarcaMBean.selecionarMarca(marcas)}" update="frmCadastroMarca"></p:commandButton>
 					<p:commandButton icon="ui-icon-circle-close" oncomplete="PF('dlgConfirmarExclusao').show()"
-							action="#{cadastroMarcaMBean.selecionarMarca(marcas)}"></p:commandButton>
+							actionListener="#{cadastroMarcaMBean.selecionarMarca(marcas)}" update="frmDialogExclusao"></p:commandButton>
 				</p:column>
 			</p:dataTable>
 			
