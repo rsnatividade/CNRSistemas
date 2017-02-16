@@ -1,0 +1,10 @@
+<style type="text/css"> 
+.Bimage {
+	background-image:url('resources/imagens/welcome_mecanica.jpg') !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	width:800 !important;
+	height:600 !important;
+	border:3 !important;
+}
+</style>

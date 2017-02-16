@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body >
+
+    <p:layout fullPage="true">
+
+        <p:layoutUnit header="Sistema de Gestao de Oficinas" position="north"
+            resizable="false" closable="false" collapsible="false">
+            <p:toolbar style="height:39px;">
+                <f:facet name="left">
+                    <p:outputLabel value="Diego Augusto"
+                        style="position: relative;left: 1360px;" />
+                    <p:commandButton value="Sair"
+                        style="height:28px;width:90px; text-align:center;position: relative;left: 1370px;" />
+                </f:facet>
+            </p:toolbar>
+        </p:layoutUnit>
+
+        <p:layoutUnit header="Desenvolvido por: TI Unimed Norte Pioneiro"
+            position="south" resizable="false" closable="false"
+            collapsible="false">
+        </p:layoutUnit>
+
+        <p:layoutUnit header="Menu Inicial" size="200" position="west"
+            resizable="false" closable="false" collapsible="false">
+            <h:form>
+
+                <p:panelMenu >
+                    <p:submenu label="Arquivo">
+                        <p:menuitem value="Página Principal" outcome="/pages/principal.xhtml" />
+                        <p:menuitem value="Sobre" />
+                        <p:menuitem value="Sair" />
+                    </p:submenu>
+
+                    <p:submenu label="Auditorias">
+                        <p:menuitem value="Todos Procedimentos"
+                            outcome="/pages/solicitacoesGeral.xhtml" />
+                    </p:submenu>
+                    <p:submenu label="Relatórios"></p:submenu>
+
+                </p:panelMenu>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="east" size="400" header="Sobre a Auditoria"
+            style="text-align:center;" resizable="false" closable="false "
+            collapsible="true" effect="drop">
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center" resizable="false" closable="false"
+            collapsible="false">
+            <ui:insert name="conteudo" />
+            <h:panelGrid>
+                <p:graphicImage styleClass="ladoDir.css" style="height: 73px; width: 900px;"  />
+            </h:panelGrid>
+
+        </p:layoutUnit>
+    </p:layout>
+   </h:body>
+   </html>
