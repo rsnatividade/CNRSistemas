@@ -41,8 +41,12 @@
 					<h:outputText value="#{veiculo.cor}" />
 				</p:column>
 				<p:column>
-					<p:commandButton icon="ui-icon-pencil"></p:commandButton>
-					<p:commandButton icon="ui-icon-circle-close"></p:commandButton>
+					<p:commandButton icon="ui-icon-pencil" ajax="true" oncomplete="PF('dlgCadastroVeiculo').show()"
+						actionListener="#{cadastroVeiculoMBean.selecionarVeiculo(veiculo)}" update="frmCadastroVeiculo">
+					</p:commandButton>
+					<p:commandButton icon="ui-icon-circle-close" oncomplete="PF('dlgConfirmarExclusao').show()"
+					    actionListener="#{cadastroVeiculoMBean.selecionarVeiculo(veiculo)}" update="frmDialogExclusao">
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 		</h:form>
@@ -52,23 +56,37 @@
 					modal="true" closable="false" position="center" width="350">
 				<div>
 					<fieldset>
-						<legend>Novo Veículo</legend>
-						<p>Placa:</p>
-						<h:inputText value="#{cadastroVeiculoMBean.veiculo.placa}" />
-                        <p>Ano Modelo:</p>
-						<h:inputText value="#{cadastroVeiculoMBean.veiculo.ano_modelo}" />
-                        <p>Ano Fabricação:</p>
-						<h:inputText value="#{cadastroVeiculoMBean.veiculo.ano_fabricacao}" /> 
-                        <p>Cor:</p>
+						<legend>Placa:</legend>
+						<p:inputMask value="#{cadastroVeiculoMBean.veiculo.placa}" mask="aaa-9999" style="text-transform: uppercase" />
+						<legend>Descrição:</legend>
+						<p:inputTextarea value="#{cadastroVeiculoMBean.veiculo.descricao}" />
+                        <legend>Ano Modelo:</legend>
+						<p:spinner value="#{cadastroVeiculoMBean.veiculo.ano_modelo}" min="1960" max="2100" />
+                        <legend>Ano Fabricação:</legend>
+						<p:spinner value="#{cadastroVeiculoMBean.veiculo.ano_fabricacao}" min="1960" max="2100" /> 
+                        <legend>Cor:</legend>
 						<h:inputText value="#{cadastroVeiculoMBean.veiculo.cor}" />
+						<legend>Combustível:</legend>
+						<h:selectOneMenu value="#{cadastroVeiculoMBean.veiculo.combustivel}">
+						  <f:selectItems value="#{cadastroVeiculoMBean.combustiveis}" var="combustivel" itemLabel="#{combustivel.descricao}" />
+						</h:selectOneMenu>
 					</fieldset>
 				</div>
 				<div style="float: right;">
 					<p:commandButton action="#{cadastroVeiculoMBean.incluirVeiculo()}" value="Salvar" 
-							oncomplete="PF('dlgCadastroVeiculo').hide()" update="frmVeiculo"></p:commandButton>
+							oncomplete="PF('dlgCadastroVeiculo').hide()" update=":frmVeiculo"></p:commandButton>
 					<p:commandButton onclick="PF('dlgCadastroVeiculo').hide()" value="Cancelar"></p:commandButton>
 				</div>
 			</p:dialog>
+		</h:form>
+		
+		<h:form id="frmDialogExclusao">
+			<p:confirmDialog id="dlgConfirmarExclusao" widgetVar="dlgConfirmarExclusao" closable="false"
+				message="Confirma a Exclusão do Veículo '#{cadastroVeiculoMBean.veiculo.placa}' ?">
+				<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()" value="Cancelar" />
+				<p:commandButton oncomplete="PF('dlgConfirmarExclusao').hide()" value="Confirmar"
+						action="#{cadastroVeiculoMBean.excluirVeiculo()}"></p:commandButton>
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

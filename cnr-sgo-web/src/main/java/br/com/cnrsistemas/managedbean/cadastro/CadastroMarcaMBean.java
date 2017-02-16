@@ -6,8 +6,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import org.primefaces.context.RequestContext;
-
 import br.com.cnrsistemas.dao.administrativo.AdministrativoSessionFacade;
 import br.com.cnrsistemas.model.administrativo.Marca;
 

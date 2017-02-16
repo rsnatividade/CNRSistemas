@@ -78,7 +78,7 @@ public class Veiculo implements Serializable {
 		return placa;
 	}
 	public void setPlaca(String placa) {
-		this.placa = placa;
+		this.placa = placa.toUpperCase();
 	}
 	public String getCor() {
 		return cor;
