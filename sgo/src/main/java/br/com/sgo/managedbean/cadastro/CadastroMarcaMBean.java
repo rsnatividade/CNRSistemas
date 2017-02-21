@@ -53,5 +53,4 @@ public class CadastroMarcaMBean {
 	public void setMarca(Marca marca) {
 		this.marca = marca;
 	}
-	
 }

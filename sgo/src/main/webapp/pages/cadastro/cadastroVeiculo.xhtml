@@ -4,16 +4,18 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	template="/resource/layout/template.xhtml">
+	template="../../template/layoutBase.xhtml">
 	<ui:define name="corpo">
 		<h2>Cadastro de Veículos</h2>
 		<h:form id="frmVeiculo">
-			<p:dataTable value="#{cadastroVeiculoMBean.veiculos}" var="veiculo" id="dtVeiculo"
-				paginator="true" rows="10" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15"
+			<p:dataTable value="#{cadastroVeiculoMBean.veiculos}" var="veiculo"
+				id="dtVeiculo" paginator="true" rows="10" paginatorPosition="bottom"
+				rowsPerPageTemplate="5,10,15"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 				<f:facet name="header">
 					<fieldset style="text-align: right; border: none;">
-						<p:commandButton icon="ui-icon-circle-plus" onclick="PF('dlgCadastroVeiculo').show()" />
+						<p:commandButton icon="ui-icon-circle-plus"
+							onclick="PF('dlgCadastroVeiculo').show()" />
 					</fieldset>
 				</f:facet>
 				<p:column>
@@ -34,41 +36,73 @@
 				</p:column>
 				<p:column>
 					<f:facet name="header">Ano Fab./Mod.</f:facet>
-					<h:outputText value="#{veiculo.ano_fabricacao}/#{veiculo.ano_modelo}" />
+					<h:outputText
+						value="#{veiculo.ano_fabricacao}/#{veiculo.ano_modelo}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">Cor</f:facet>
 					<h:outputText value="#{veiculo.cor}" />
 				</p:column>
 				<p:column>
-					<p:commandButton icon="ui-icon-pencil"></p:commandButton>
-					<p:commandButton icon="ui-icon-circle-close"></p:commandButton>
+					<p:commandButton icon="ui-icon-pencil" ajax="true"
+						oncomplete="PF('dlgCadastroVeiculo').show()"
+						actionListener="#{cadastroVeiculoMBean.selecionarVeiculo(veiculo)}"
+						update="frmCadastroVeiculo">
+					</p:commandButton>
+					<p:commandButton icon="ui-icon-circle-close"
+						oncomplete="PF('dlgConfirmarExclusao').show()"
+						actionListener="#{cadastroVeiculoMBean.selecionarVeiculo(veiculo)}"
+						update="frmDialogExclusao">
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 		</h:form>
-		
+
 		<h:form id="frmCadastroVeiculo">
-			<p:dialog id="dlgCadastroVeiculo" widgetVar="dlgCadastroVeiculo" 
-					modal="true" closable="false" position="center" width="350">
+			<p:dialog id="dlgCadastroVeiculo" widgetVar="dlgCadastroVeiculo"
+				modal="true" closable="false" position="center" width="350">
 				<div>
 					<fieldset>
-						<legend>Novo Veículo</legend>
-						<p>Placa:</p>
-						<h:inputText value="#{cadastroVeiculoMBean.veiculo.placa}" />
-                        <p>Ano Modelo:</p>
-						<h:inputText value="#{cadastroVeiculoMBean.veiculo.ano_modelo}" />
-                        <p>Ano Fabricação:</p>
-						<h:inputText value="#{cadastroVeiculoMBean.veiculo.ano_fabricacao}" /> 
-                        <p>Cor:</p>
+						<legend>Placa:</legend>
+						<p:inputMask value="#{cadastroVeiculoMBean.veiculo.placa}"
+							mask="aaa-9999" style="text-transform: uppercase" />
+						<legend>Descrição:</legend>
+						<p:inputTextarea value="#{cadastroVeiculoMBean.veiculo.descricao}" />
+						<legend>Ano Modelo:</legend>
+						<p:spinner value="#{cadastroVeiculoMBean.veiculo.ano_modelo}"
+							min="1960" max="2100" />
+						<legend>Ano Fabricação:</legend>
+						<p:spinner value="#{cadastroVeiculoMBean.veiculo.ano_fabricacao}"
+							min="1960" max="2100" />
+						<legend>Cor:</legend>
 						<h:inputText value="#{cadastroVeiculoMBean.veiculo.cor}" />
+						<legend>Combustível:</legend>
+						<h:selectOneMenu
+							value="#{cadastroVeiculoMBean.veiculo.combustivel}">
+							<f:selectItems value="#{cadastroVeiculoMBean.combustiveis}"
+								var="combustivel" itemLabel="#{combustivel.descricao}" />
+						</h:selectOneMenu>
 					</fieldset>
 				</div>
 				<div style="float: right;">
-					<p:commandButton action="#{cadastroVeiculoMBean.incluirVeiculo()}" value="Salvar" 
-							oncomplete="PF('dlgCadastroVeiculo').hide()" update="frmVeiculo"></p:commandButton>
-					<p:commandButton onclick="PF('dlgCadastroVeiculo').hide()" value="Cancelar"></p:commandButton>
+					<p:commandButton action="#{cadastroVeiculoMBean.incluirVeiculo()}"
+						value="Salvar" oncomplete="PF('dlgCadastroVeiculo').hide()"
+						update=":frmVeiculo"></p:commandButton>
+					<p:commandButton onclick="PF('dlgCadastroVeiculo').hide()"
+						value="Cancelar"></p:commandButton>
 				</div>
 			</p:dialog>
+		</h:form>
+
+		<h:form id="frmDialogExclusao">
+			<p:confirmDialog id="dlgConfirmarExclusao"
+				widgetVar="dlgConfirmarExclusao" closable="false"
+				message="Confirma a Exclusão do Veículo '#{cadastroVeiculoMBean.veiculo.placa}' ?">
+				<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()"
+					value="Cancelar" />
+				<p:commandButton oncomplete="PF('dlgConfirmarExclusao').hide()"
+					value="Confirmar" action="#{cadastroVeiculoMBean.excluirVeiculo()}"></p:commandButton>
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

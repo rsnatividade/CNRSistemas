@@ -42,4 +42,9 @@ public class AdministrativoSessionFacade {
 		VeiculoDao veiculoDao = new VeiculoDao(em);
 		veiculoDao.salvar(veiculo);
 	}
+
+	public void removerVeiculo(Veiculo veiculo) {
+		VeiculoDao veiculoDao = new VeiculoDao(em);
+		veiculoDao.excluir(veiculo);
+	}
 }

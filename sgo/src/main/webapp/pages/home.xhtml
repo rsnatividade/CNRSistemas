@@ -1,29 +1,15 @@
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> -->
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	template="../template/layoutBase.xhtml">
 
-	<h:head></h:head>
-	<ui:composition template="/template/layoutBase.xhtml">
-		<f:facet name="left">
-            <p:outputLabel value="Diego Augusto" style="position: relative;left: 1360px;" />
-            <p:commandButton value="Sair"  style="height:28px;width:90px; text-align:center;position: relative;left: 1370px;" />
-        </f:facet>
-		<!-- <div class="ui-g">
-			<p:graphicImage name="imagens/welcome_mecanica.jpg" style="width:900px; height:450px; align-items: center; "/>
-			</div> -->
-<!-- 			 		<div class="ui-g">
-						<div class="ui-g-6 ui-md-3" align="center" >
-						</div>
-					</div>
- --><!-- 			<h:body style="display:flex;">
-				<br></br>
-				<ui:insert name="content" style="align-items: center;" >
-				</ui:insert>
-			</h:body> -->
-	</ui:composition>
-</html>
+	<ui:define name="corpo">
+		<h:outputText value="Saindo alguma coisa" />
+	</ui:define>	
+	
+</ui:composition>
