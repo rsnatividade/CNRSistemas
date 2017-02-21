@@ -81,8 +81,22 @@
 			<version>1.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>bluesky</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+		
 	</dependencies>
 
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+	</repositories>
+	
 	<build>
 		<finalName>sgo</finalName>
 		<plugins>
