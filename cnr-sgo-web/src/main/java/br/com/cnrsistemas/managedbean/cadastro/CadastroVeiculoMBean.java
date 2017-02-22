@@ -1,13 +1,21 @@
 package br.com.cnrsistemas.managedbean.cadastro;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 import br.com.cnrsistemas.dao.administrativo.AdministrativoSessionFacade;
 import br.com.cnrsistemas.model.administrativo.Combustivel;
@@ -34,14 +42,14 @@ public class CadastroVeiculoMBean {
 		
         Marca marca = new Marca();
 		
-		marca.setId(1);
-		marca.setNome("Volkswagen");		
+		//marca.setId(1);
+		//marca.setNome("Volkswagen");		
 		
 		Modelo modelo = new Modelo();
 		
-		modelo.setId(1);
-		modelo.setMarca(marca);
-		modelo.setNome("Fuscao");
+		//modelo.setId(1);
+		//modelo.setMarca(marca);
+		//modelo.setNome("Fuscao");
 		
 		veiculo.setModelo(modelo);	
 		veiculo.setAno_fabricacao(Calendar.getInstance().get(Calendar.YEAR));
@@ -84,6 +92,22 @@ public class CadastroVeiculoMBean {
 
 	public void setClientes(List<Veiculo> veiculos) {
 		this.veiculos = veiculos;
+	}
+	
+	public void buscarModelo() {
+		Map<String, Object> opcoes = new HashMap<String, Object>();
+		opcoes.put("resizable", false);
+		opcoes.put("draggable", true);
+		opcoes.put("modal", true);
+		
+		RequestContext.getCurrentInstance().openDialog("buscarModelo", opcoes, null);
+	}
+	
+	public void retBuscarModelo(SelectEvent evt) {
+		Modelo modelo = (Modelo)evt.getObject();
+		
+		System.out.println(modelo.getNome());
+		veiculo.setModelo(modelo);
 	}
 
 }
