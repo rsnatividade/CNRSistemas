@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import br.com.sgo.model.administrativo.Marca;
+import br.com.sgo.model.administrativo.Modelo;
 import br.com.sgo.model.administrativo.Veiculo;
 
 public class AdministrativoSessionFacade {
@@ -46,5 +47,20 @@ public class AdministrativoSessionFacade {
 	public void removerVeiculo(Veiculo veiculo) {
 		VeiculoDao veiculoDao = new VeiculoDao(em);
 		veiculoDao.excluir(veiculo);
+	}
+	
+	public void salvarModelo(Modelo modelo){
+		ModeloDao modeloDao = new ModeloDao(em);
+		modeloDao.salvar(modelo);
+	}
+	
+	public void removerModelo(Modelo modelo){
+		ModeloDao modeloDao = new ModeloDao(em);
+		modeloDao.excluir(modelo);
+	}
+
+	public List<Modelo> listarModelosAtivos(){
+		ModeloDao modeloDao = new ModeloDao(em);
+		return modeloDao.listarModelosAtivos();
 	}
 }

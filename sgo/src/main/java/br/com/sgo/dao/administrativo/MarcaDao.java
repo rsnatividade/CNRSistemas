@@ -17,6 +17,7 @@ public class MarcaDao extends ObjectDao {
 		this.em = em;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Marca> listarMarcasAtivas(){
 		StringBuffer sb = new StringBuffer();
 		sb.append("from Marca m");

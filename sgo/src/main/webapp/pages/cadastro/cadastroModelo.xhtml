@@ -6,6 +6,70 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="../../template/layoutBase.xhtml">
 	<ui:define name="corpo">
-		<h2>Aqui terá o formulario de cadastro das Marcas</h2>
+		<h2>Cadastro de Modelos</h2>
+		
+		<h:form id="frmModelo">
+			<p:dataTable value="#{cadastroModeloMBean.modelos}" var="modelo">
+				<f:facet name="header">
+					<fieldset style="text-align: right; border: none;">
+						<p:commandButton onclick="PF('dlgCadastraModelo').show()"
+							icon="ui-icon-circle-plus"/>
+					</fieldset>
+				</f:facet>
+				<p:column headerText="ID">
+					<h:outputText value="#{modelo.id}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{modelo.nome}" />
+				</p:column>
+				<p:column headerText="Marca">
+					<h:outputText value="#{modelo.marca.nome}" />
+				</p:column>
+				<p:column>
+					<p:commandButton actionListener="#{cadastroModeloMBean.selecionarModelo(modelo)}"
+						oncomplete="PF('dlgCadastraModelo').show()" icon="ui-icon-pencil" 
+						update="frmModeloCadastro" />
+					<p:commandButton actionListener="#{cadastroModeloMBean.selecionarModelo(modelo)}"
+						oncomplete="PF('dlgConfirmarExclusao').show()" icon="ui-icon-circle-close"
+						update="frmDialogExclusao" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		
+		<h:form id="frmModeloCadastro">
+			<p:dialog id="dlgCadastraModelo" widgetVar="dlgCadastraModelo">
+				<div>
+					<fieldset>
+						<legend>Nome:</legend>
+						<h:inputText value="#{cadastroModeloMBean.modelo.nome}" />
+					</fieldset>
+					<fieldset>
+						<legend>Marca:</legend>
+						<h:selectOneMenu value="#{cadastroModeloMBean.modelo.marca}" converter="marcaConverter">
+							<f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+							<f:selectItems value="#{cadastroModeloMBean.marcas}" var="marca"
+									itemLabel="#{marca.nome}" itemValue="#{marca}"/>
+						</h:selectOneMenu>
+					</fieldset>
+				</div>
+				<div style="float: right;">
+					<p:commandButton action="#{cadastroModeloMBean.cadastraModelo()}"
+						value="Salvar" oncomplete="PF('dlgCadastraModelo').hide()"
+						update=":frmModelo"></p:commandButton>
+					<p:commandButton onclick="PF('dlgCadastraModelo').hide()"
+						value="Cancelar"></p:commandButton>
+				</div>
+			</p:dialog>
+		</h:form>
+		
+		<h:form id="frmDialogExclusao">
+			<p:confirmDialog id="dlgConfirmarExclusao" widgetVar="dlgConfirmarExclusao"
+					closable="false" message="Confirma a exclusão do Modelo selecionado?">
+				<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()"
+					value="Cancelar" />
+				<p:commandButton oncomplete="PF('dlgConfirmarExclusao').hide()"
+					value="Confirmar" action="#{cadastroModeloMBean.removerModelo()}" />
+			</p:confirmDialog>
+		</h:form>
 	</ui:define>
 </ui:composition>
