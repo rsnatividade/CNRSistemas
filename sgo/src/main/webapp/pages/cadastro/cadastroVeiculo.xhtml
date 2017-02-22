@@ -68,6 +68,17 @@
 							mask="aaa-9999" style="text-transform: uppercase" />
 						<legend>Descrição:</legend>
 						<p:inputTextarea value="#{cadastroVeiculoMBean.veiculo.descricao}" />
+						<legend>Modelo:</legend>
+						<h:outputText id="marca"
+							value="#{cadastroVeiculoMBean.veiculo.modelo.marca.nome} - #{cadastroVeiculoMBean.veiculo.modelo.nome}" />
+						<br />
+						<p:commandButton value="Buscar" icon="ui-icon-extlink"
+							action="#{cadastroVeiculoMBean.buscarModelo}" process="@this"
+							update="@none">
+							<p:ajax event="dialogReturn"
+								listener="#{cadastroVeiculoMBean.retBuscarModelo}"
+								process="@this" update="marca" />
+						</p:commandButton>
 						<legend>Ano Modelo:</legend>
 						<p:spinner value="#{cadastroVeiculoMBean.veiculo.ano_modelo}"
 							min="1960" max="2100" />

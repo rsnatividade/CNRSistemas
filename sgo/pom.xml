@@ -9,6 +9,14 @@
 	<url>http://maven.apache.org</url>
 	<dependencies>
 
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- JSF -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -84,7 +92,7 @@
 			<artifactId>bluesky</artifactId>
 			<version>1.0.10</version>
 		</dependency>
-		
+
 	</dependencies>
 
 	<repositories>
@@ -94,7 +102,7 @@
 			<url>http://repository.primefaces.org</url>
 		</repository>
 	</repositories>
-	
+
 	<build>
 		<finalName>sgo</finalName>
 		<plugins>
