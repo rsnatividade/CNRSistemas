@@ -6,6 +6,82 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="../../template/layoutBase.xhtml">
 	<ui:define name="corpo">
-		<h2>Aqui terá o formulario de cadastro das Marcas</h2>
+		<h2>Cadastro de Produto</h2>
+		<h:form>
+			<p:dataTable>
+				<f:facet name="header">
+					<fieldset style="text-align: right; border: none;">
+						<p:commandButton icon="ui-icon-plus" oncomplete="PF('dlgCadastroProduto').show()"></p:commandButton>
+					</fieldset>
+				</f:facet>
+				<p:column headerText="ID">
+				</p:column>
+				<p:column headerText="Nome">
+				</p:column>
+				<p:column headerText="Kit">
+				</p:column>
+				<p:column headerText="Preço">
+				</p:column>
+				<p:column>
+					<p:commandButton oncomplete="PF('dlgCadastroProduto').show()" icon="ui-icon-pencil" 
+						update="@form" />
+					<p:commandButton oncomplete="PF('dlgConfirmarExclusao').show()" icon="ui-icon-circle-close"
+						update="@form" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		
+		<h:form>
+			<p:dialog id="dlgCadastroProduto" widgetVar="dlgCadastroProduto">
+				<p:wizard>
+					<p:tab title="Produto">
+						<h:panelGroup>
+							<fieldset>
+								<legend>Tipo do Produto:</legend>
+								<h:inputText value="" />
+							</fieldset>
+							<fieldset>
+								<legend>Nome:</legend>
+								<h:inputText value="" />
+							</fieldset>
+						</h:panelGroup>
+					</p:tab>
+					<p:tab title="Itens Kit">
+						<h:panelGroup>
+							<fieldset>
+								<legend>Item</legend>
+								<h:inputText value="" />
+							</fieldset>
+							<fieldset>
+								<legend>Quantidade</legend>
+								<h:inputText value="" />
+							</fieldset>
+						</h:panelGroup>
+					</p:tab>
+					<p:tab title="Logística">
+						<h:panelGroup>
+							<fieldset>
+								<legend>Estoque Mínimo</legend>
+								<h:inputText value="" />
+							</fieldset>
+							<fieldset>
+								<legend>Preço Compra</legend>
+								<h:inputText value="" />
+							</fieldset>
+							<fieldset>
+								<legend>Margem</legend>
+								<h:inputText value="" />
+							</fieldset>
+						</h:panelGroup>
+					</p:tab>
+				</p:wizard>
+			</p:dialog>
+		</h:form>
+
+		<h:form>
+			<p:confirmDialog id="dlgConfirmarExclusao" widgetVar="dlgConfirmarExclusao">
+			</p:confirmDialog>
+		</h:form>
+
 	</ui:define>
 </ui:composition>

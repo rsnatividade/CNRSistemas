@@ -10,11 +10,12 @@
 		<h2>Cadastro de Marcas</h2>
 
 		<h:form id="frmMarcas">
-			<p:dataTable value="#{cadastroMarcaMBean.marcas}" var="marcas">
+			<p:dataTable value="#{cadastroMarcaMBean.marcas}" var="marcas" id="dtMarcas">
 				<f:facet name="header">
 					<fieldset style="text-align: right; border: none;">
 						<p:commandButton icon="ui-icon-circle-plus"
-							onclick="PF('dlgCadastroMarca').show()"></p:commandButton>
+							oncomplete="PF('dlgCadastroMarca').show()" 
+							update="@form"></p:commandButton>
 					</fieldset>
 				</f:facet>
 				<p:column headerText="ID">
@@ -27,17 +28,14 @@
 					<p:commandButton icon="ui-icon-pencil"
 						oncomplete="PF('dlgCadastroMarca').show()"
 						actionListener="#{cadastroMarcaMBean.selecionarMarca(marcas)}"
-						update="frmCadastroMarca"></p:commandButton>
+						update="@form"></p:commandButton>
 					<p:commandButton icon="ui-icon-circle-close"
 						oncomplete="PF('dlgConfirmarExclusao').show()"
 						actionListener="#{cadastroMarcaMBean.selecionarMarca(marcas)}"
-						update="frmDialogExclusao"></p:commandButton>
+						update="@form"></p:commandButton>
 				</p:column>
 			</p:dataTable>
 
-		</h:form>
-
-		<h:form id="frmCadastroMarca">
 			<p:dialog id="dlgCadastroMarca" widgetVar="dlgCadastroMarca"
 				modal="true" closable="false" position="center" width="350">
 				<div>
@@ -47,23 +45,21 @@
 					</fieldset>
 				</div>
 				<div style="float: right;">
-					<p:commandButton action="#{cadastroMarcaMBean.cadastrarMarca()}"
+					<p:commandButton actionListener="#{cadastroMarcaMBean.cadastrarMarca()}"
 						value="Salvar" oncomplete="PF('dlgCadastroMarca').hide()"
-						update=":frmMarcas"></p:commandButton>
+						update="@form"/>
 					<p:commandButton onclick="PF('dlgCadastroMarca').hide()"
 						value="Cancelar"></p:commandButton>
 				</div>
 			</p:dialog>
-		</h:form>
 
-		<h:form id="frmDialogExclusao">
 			<p:confirmDialog id="dlgConfirmarExclusao"
 				widgetVar="dlgConfirmarExclusao" closable="false"
 				message="Confirma a Exclusão da Marca?">
 				<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()"
 					value="Cancelar" />
 				<p:commandButton oncomplete="PF('dlgConfirmarExclusao').hide()"
-					value="Confirmar" action="#{cadastroMarcaMBean.removerMarca()}" />
+					value="Confirmar" actionListener="#{cadastroMarcaMBean.removerMarca()}" />
 			</p:confirmDialog>
 		</h:form>
 	</ui:define>
