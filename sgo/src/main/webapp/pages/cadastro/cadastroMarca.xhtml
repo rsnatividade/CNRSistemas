@@ -5,63 +5,87 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="../../template/layoutBase.xhtml">
-
 	<ui:define name="corpo">
-		<h2>Cadastro de Marcas</h2>
-
-		<h:form id="frmMarcas">
-			<p:dataTable value="#{cadastroMarcaMBean.marcas}" var="marcas" id="dtMarcas">
+		<h:form style="margin:auto; margin-top:4%; margin-left:2%; margin-bottom: 1%;" id="frmMarcas">
+			<p:dataTable var="marcas" id="dtMarcas" value="#{cadastroMarcaMBean.marcas}" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}
+				{LastPageLink} {RowsPerPageDropdown}" paginatorPosition="bottom" rowsPerPageTemplate="5,10" style="width:98%;">
 				<f:facet name="header">
-					<fieldset style="text-align: right; border: none;">
-						<p:commandButton icon="ui-icon-circle-plus"
-							oncomplete="PF('dlgCadastroMarca').show()" 
-							update="@form"></p:commandButton>
-					</fieldset>
+						<p:outputLabel value="CADASTRO DE MARCAS"  style="text-align: center !important; font-size: x-large !important;" />
 				</f:facet>
-				<p:column headerText="ID">
+				<p:column headerText="Id" style="width:50px; text-align: center">
 					<h:outputText value="#{marcas.id}" />
 				</p:column>
-				<p:column headerText="Nome">
-					<h:outputText value="#{marcas.nome}" />
+				<p:column headerText="Marca" style="text-align: left;">
+					<h:outputText value="#{marcas.nome}"/>
 				</p:column>
-				<p:column>
-					<p:commandButton icon="ui-icon-pencil"
-						oncomplete="PF('dlgCadastroMarca').show()"
+				<p:column headerText="Alterar" style="width:50px; text-align: center;">
+					<p:commandButton
+						icon="ui-icon-pencil"
+						title="Editar Marca"
+						ajax="true"
 						actionListener="#{cadastroMarcaMBean.selecionarMarca(marcas)}"
-						update="@form"></p:commandButton>
-					<p:commandButton icon="ui-icon-circle-close"
-						oncomplete="PF('dlgConfirmarExclusao').show()"
-						actionListener="#{cadastroMarcaMBean.selecionarMarca(marcas)}"
-						update="@form"></p:commandButton>
+						oncomplete="PF('dlgCadastroMarca').show();"
+						update="@form"
+					/>
 				</p:column>
+				<p:column headerText="Excluir" style="width:50px; text-align: center;">
+					<p:commandButton
+						icon="ui-icon-circle-close"
+						title="Excluir Marca"
+						ajax="true"
+						actionListener="#{cadastroMarcaMBean.selecionarMarca(marcas)}"
+						oncomplete="PF('dlgConfirmarExclusao').show();"
+						update="@form"
+					/>
+				</p:column>
+				<f:facet name="footer">
+					<fieldset  style=" text-align:center; height:18px; border: none; margin: auto;">
+						<p:commandButton
+							oncomplete="PF('dlgCadastroMarca').show()" 
+							value="Incluir Marca"
+							ajax="true"
+							update="@form"
+							alt="botton"
+						/>
+						<p:spacer/><p:spacer/><p:spacer/><p:spacer/>
+						<p:commandButton value="Voltar" onclick="window.history.back();"/>
+					</fieldset>
+				</f:facet>
 			</p:dataTable>
-
-			<p:dialog id="dlgCadastroMarca" widgetVar="dlgCadastroMarca"
-				modal="true" closable="false" position="center" width="350">
+			<p:dialog header="Inclus&atilde;o de nova Marca" widgetVar="dlgCadastroMarca" modal="true" height="90px" width="350px">
 				<div>
 					<fieldset>
 						<legend>Nome:</legend>
-						<h:inputText value="#{cadastroMarcaMBean.marca.nome}" />
+						<h:inputText value="#{cadastroMarcaMBean.marca.nome}" size="43"/>
 					</fieldset>
 				</div>
-				<div style="float: right;">
-					<p:commandButton actionListener="#{cadastroMarcaMBean.cadastrarMarca()}"
-						value="Salvar" oncomplete="PF('dlgCadastroMarca').hide()"
-						update="@form"/>
-					<p:commandButton onclick="PF('dlgCadastroMarca').hide()"
-						value="Cancelar"></p:commandButton>
+				<br/>
+				<div style=" text-align:center;">
+					<p:commandButton 
+						actionListener="#{cadastroMarcaMBean.cadastrarMarca()}"
+						value="Salvar" 
+						oncomplete="PF('dlgCadastroMarca').hide()"
+						update="@form"
+					/><p:spacer/><p:spacer/><p:spacer/><p:spacer/>
+					<p:commandButton 
+						onclick="PF('dlgCadastroMarca').hide()"
+						value="Cancelar" 
+					/>
 				</div>
 			</p:dialog>
-
-			<p:confirmDialog id="dlgConfirmarExclusao"
-				widgetVar="dlgConfirmarExclusao" closable="false"
-				message="Confirma a Exclusão da Marca?">
-				<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()"
-					value="Cancelar" />
-				<p:commandButton oncomplete="PF('dlgConfirmarExclusao').hide()"
-					value="Confirmar" actionListener="#{cadastroMarcaMBean.removerMarca()}" />
+			<p:confirmDialog header="Exclus&atilde;o de Marca" id="dlgConfirmarExclusao" closable="false" widgetVar="dlgConfirmarExclusao" 
+				message="Confirma a exclusão da Marca #{cadastroMarcaMBean.marca.nome}?" height="30px" width="300px" >
+				<div style="text-align: center; margin-top: 5px; ">
+					<p:commandButton value="Confirmar" ajax="true" update="frmMarcas"
+						oncomplete="PF('dlgConfirmarExclusao').hide()" actionListener="#{cadastroMarcaMBean.removerMarca()}"
+					>
+					<f:ajax execute="@form" render="@form" />
+					</p:commandButton>
+					<p:spacer/><p:spacer/><p:spacer/><p:spacer/>
+					<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()" value="Cancelar" />
+				</div>
 			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
-

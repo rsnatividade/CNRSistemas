@@ -6,17 +6,14 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="../../template/layoutBase.xhtml">
 	<ui:define name="corpo">
-		<h2>Cadastro de Modelos</h2>
-		
-		<h:form id="frmModelo">
-			<p:dataTable value="#{cadastroModeloMBean.modelos}" var="modelo" id="dtModelo">
+		<h:form style="margin:auto; margin-top:4%; margin-left:2%; margin-bottom: 1%;" id="form-consulta-modelos">
+			<p:dataTable var="modelo" id="modeloList" value="#{cadastroModeloMBean.modelos}" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}
+				{LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10" style="width:98%;">
 				<f:facet name="header">
-					<fieldset style="text-align: right; border: none;">
-						<p:commandButton oncomplete="PF('dlgCadastraModelo').show()"
-							icon="ui-icon-circle-plus" update="@form"/>
-					</fieldset>
+						<p:outputLabel value="CADASTRO DE MODELOS"  style="text-align: center !important; font-size: x-large !important;" />
 				</f:facet>
-				<p:column headerText="ID">
+				<p:column headerText="ID" style="width:50px; text-align: center">
 					<h:outputText value="#{modelo.id}" />
 				</p:column>
 				<p:column headerText="Nome">
@@ -25,17 +22,41 @@
 				<p:column headerText="Marca">
 					<h:outputText value="#{modelo.marca.nome}" />
 				</p:column>
-				<p:column>
-					<p:commandButton actionListener="#{cadastroModeloMBean.selecionarModelo(modelo)}"
-						oncomplete="PF('dlgCadastraModelo').show()" icon="ui-icon-pencil" 
-						update="@form" />
-					<p:commandButton actionListener="#{cadastroModeloMBean.selecionarModelo(modelo)}"
-						oncomplete="PF('dlgConfirmarExclusao').show()" icon="ui-icon-circle-close"
-						update="@form" />
+				<p:column headerText="Alterar" style="width:50px; text-align: center;">
+					<p:commandButton
+						icon="ui-icon-pencil"
+						title="Editar Modelo"
+						ajax="true"
+						actionListener="#{cadastroModeloMBean.selecionarModelo(modelo)}"
+						oncomplete="PF('dlgCadastraModelo').show();"
+						update="@form"
+					/>
 				</p:column>
+				<p:column headerText="Exclus&atilde;o" style="width: 50px; text-align: center;">
+					<p:commandButton 
+						icon="ui-icon-circle-close"
+						title="Excluir Modelo"
+						ajax="true"
+						actionListener="#{cadastroModeloMBean.selecionarModelo(modelo)}" 
+						oncomplete="PF('dlgConfirmarExclusao').show()" 
+						update="@form"
+					/>
+				</p:column>
+				<f:facet name="footer">
+					<fieldset  style=" text-align:center; height:18px; border: none; margin: auto;">
+						<p:commandButton
+							oncomplete="PF('dlgCadastraModelo').show()" 
+							value="Incluir Modelo"
+							ajax="true"
+							update="@form"
+							alt="botton"
+						/>
+						<p:spacer/><p:spacer/><p:spacer/><p:spacer/>
+						<p:commandButton value="Voltar" onclick="window.history.back();"/>
+					</fieldset>
+				</f:facet>
 			</p:dataTable>
-		
-			<p:dialog id="dlgCadastraModelo" widgetVar="dlgCadastraModelo">
+			<p:dialog header="Inclus&atilde;o de novo Modelo" id="dlgCadastraModelo" widgetVar="dlgCadastraModelo" modal="true" height="150px"	width="350px">
 				<div>
 					<fieldset>
 						<legend>Nome:</legend>
@@ -50,21 +71,32 @@
 						</h:selectOneMenu>
 					</fieldset>
 				</div>
-				<div style="float: right;">
-					<p:commandButton actionListener="#{cadastroModeloMBean.cadastraModelo()}"
-						value="Salvar" oncomplete="PF('dlgCadastraModelo').hide()"
-						update="@form"/>
-					<p:commandButton onclick="PF('dlgCadastraModelo').hide()"
-						value="Cancelar"></p:commandButton>
+				<div style="float:right; margin: auto;">
+					<p:commandButton 
+						actionListener="#{cadastroModeloMBean.cadastraModelo()}"
+						value="Salvar" 
+						oncomplete="PF('modeloList').hide();"
+						update="form-consulta-modelos"
+					/>
+					<p:spacer/><p:spacer/><p:spacer/><p:spacer/>
+					<p:commandButton 
+						onclick="PF('dlgCadastraModelo').hide()"
+						value="Cancelar"
+					/>
+					<p:ajax />
 				</div>
 			</p:dialog>
-		
-			<p:confirmDialog id="dlgConfirmarExclusao" widgetVar="dlgConfirmarExclusao"
-					closable="false" message="Confirma a exclusão do Modelo selecionado?">
-				<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()"
-					value="Cancelar" />
-				<p:commandButton oncomplete="PF('dlgConfirmarExclusao').hide()"
-					value="Confirmar" actionListener="#{cadastroModeloMBean.removerModelo()}" />
+			<p:confirmDialog header="Inclus&atilde;o de novo Modelo" id="dlgConfirmarExclusao" closable="false"
+				widgetVar="dlgConfirmarExclusao" message="Confirma a exclusão do Modelo #{cadastroModeloMBean.modelo.nome}?" height="30px" width="300px">
+				<div style="float:right; margin-top: 5px; ">
+					<p:commandButton value="Confirmar" ajax="true" update="form-consulta-modelos"
+						oncomplete="PF('dlgConfirmarExclusao').hide()" actionListener="#{cadastroModeloMBean.removerModelo()}"
+					>
+					<f:ajax execute="@form" render="@form" />
+					</p:commandButton>
+					<p:spacer/><p:spacer/><p:spacer/><p:spacer/>
+					<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()" value="Cancelar" />
+				</div>
 			</p:confirmDialog>
 		</h:form>
 	</ui:define>

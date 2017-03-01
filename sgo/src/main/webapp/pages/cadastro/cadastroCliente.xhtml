@@ -5,23 +5,16 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="../../template/layoutBase.xhtml">
-
 	<ui:define name="corpo">
-		<h2>Cadastro de Clientes</h2>
-		<h:form id="frmCliente">
-			<p:dataTable value="#{cadastroClienteMBean.clientes}" var="cliente"
-				id="dtCliente" paginator="true" rows="10" paginatorPosition="bottom"
-				rowsPerPageTemplate="5,10,15"
-				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+		<h:form style="margin:auto; margin-top:4%; margin-left:2%; margin-bottom: 1%;" id="frmCliente">
+			<p:dataTable var="cliente" id="dtCliente" value="#{cadastroClienteMBean.clientes}" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}
+				{LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10" paginatorPosition="bottom" style="width:98%;">
 				<f:facet name="header">
-					<fieldset style="text-align: right; border: none;">
-						<p:commandButton icon="ui-icon-circle-plus"
-							action="#{cadastroClienteMBean.incluirCliente()}"
-							update="dtCliente" process="@this" />
-					</fieldset>
+						<p:outputLabel value="CADASTRO DE CLIENTES"  style="text-align: center !important; font-size: x-large !important;" />
 				</f:facet>
-				<p:column>
-					<f:facet name="header">ID</f:facet>
+				<p:column style="width:50px; text-align: center">
+					<f:facet name="header" >ID</f:facet>
 					<h:outputText value="#{cliente.id}" />
 				</p:column>
 				<p:column>
@@ -32,10 +25,34 @@
 					<f:facet name="header">Cargo</f:facet>
 					<h:outputText value="#{cliente.cargo.descricao}" />
 				</p:column>
-				<p:column>
-					<p:commandButton icon="ui-icon-pencil"></p:commandButton>
-					<p:commandButton icon="ui-icon-circle-close"></p:commandButton>
+				<p:column headerText="Alterar" style="width:50px; text-align: center;">
+					<p:commandButton
+						icon="ui-icon-pencil"
+						title="Editar Cliente"
+						ajax="true"
+						update="@form"
+					/>
 				</p:column>
+				<p:column headerText="Excluir" style="width:50px; text-align: center;">
+					<p:commandButton
+						icon="ui-icon-circle-close"
+						title="Excluir Cliente"
+						ajax="true"
+						update="@form"
+					/>
+				</p:column>
+				<f:facet name="footer">
+					<fieldset  style=" text-align:center; height:18px; border: none; margin: auto;">
+						<p:commandButton
+							oncomplete="PF('dlgCadastroCliente').show()" 
+							value="Incluir Cliente"
+							ajax="true"
+							update="@form"
+						/>
+						<p:spacer/><p:spacer/><p:spacer/><p:spacer/>
+						<p:commandButton value="Voltar" onclick="window.history.back();"/>
+					</fieldset>
+				</f:facet>
 			</p:dataTable>
 		</h:form>
 	</ui:define>

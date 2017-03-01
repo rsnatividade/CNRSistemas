@@ -7,14 +7,14 @@
 	template="../../template/layoutBase2.xhtml">
 	
 	<ui:define name="corpo">
-	
 		<h2>Busca de Modelos</h2>    
         <h:form>
-            <p:dataTable var="modelo" value="#{buscarModeloMBean.modelos}">
-                <p:column headerText="Nome">
+        	<p:dataTable id="dataTable-registros" var="modelo" value="#{buscarModeloMBean.modelos}" rows="15"
+					paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}
+					{LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15" style="width:98%;">
+                <p:column headerText="Nome" style="width:50px; text-align: center">
                     <h:outputText value="#{modelo.nome}" />
                 </p:column>
- 
                 <p:column>
                     <p:commandButton icon="ui-icon-check" actionListener="#{buscarModeloMBean.selecionar(modelo)}" />
                 </p:column>
