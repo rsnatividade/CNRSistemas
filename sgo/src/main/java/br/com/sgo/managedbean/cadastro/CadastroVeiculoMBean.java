@@ -29,21 +29,19 @@ public class CadastroVeiculoMBean {
 	private List<Veiculo> veiculos = new ArrayList<Veiculo>();
 	private Veiculo veiculo;
 	private List<Combustivel> combustiveis;
+	private String titulo_dialog;
+
+	public String getTitulo_dialog() {
+		return titulo_dialog;
+	}
 
 	@PostConstruct
 	public void init() {
 		admSession = new AdministrativoSessionFacade();
-		veiculos = admSession.listarVeiculosAtivos();
-		veiculo = new Veiculo();
-
-		Marca marca = new Marca();
-		Modelo modelo = new Modelo();
-		modelo.setMarca(marca);
-		veiculo.setModelo(modelo);
-		veiculo.setAno_fabricacao(Calendar.getInstance().get(Calendar.YEAR));
-		veiculo.setAno_modelo(Calendar.getInstance().get(Calendar.YEAR));
+		veiculos = admSession.listarVeiculosAtivos();				
 
 		combustiveis = Arrays.asList(Combustivel.values());
+		novoVeiculo();
 	}
 
 	public List<Combustivel> getCombustiveis() {
@@ -60,6 +58,7 @@ public class CadastroVeiculoMBean {
 
 	public void selecionarVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
+		titulo_dialog = new String("Editar Veículo");
 	}
 
 	public void excluirVeiculo() {
@@ -87,6 +86,7 @@ public class CadastroVeiculoMBean {
 		opcoes.put("resizable", false);
 		opcoes.put("draggable", true);
 		opcoes.put("modal", true);
+		opcoes.put("position", "center center");
 
 		RequestContext.getCurrentInstance().openDialog("buscarModelo", opcoes, null);
 	}
@@ -95,6 +95,18 @@ public class CadastroVeiculoMBean {
 		Modelo modelo = (Modelo) evt.getObject();
 
 		veiculo.setModelo(modelo);
+	}
+	public void novoVeiculo() {
+		Marca marca = new Marca();
+		Modelo modelo = new Modelo();
+		modelo.setMarca(marca);		
+		
+		veiculo = new Veiculo();
+		veiculo.setModelo(modelo);
+		veiculo.setAno_fabricacao(Calendar.getInstance().get(Calendar.YEAR));
+		veiculo.setAno_modelo(Calendar.getInstance().get(Calendar.YEAR));
+		
+		titulo_dialog = new String("Inclusão de novo Veículo");
 	}
 
 }

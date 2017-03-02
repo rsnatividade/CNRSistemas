@@ -5,23 +5,35 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="../../template/layoutBase2.xhtml">
-	
+
 	<ui:define name="corpo">
-		<h2>Busca de Modelos</h2>    
-        <h:form>
-        	<p:dataTable id="dataTable-registros" var="modelo" value="#{buscarModeloMBean.modelos}" rows="15"
-					paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}
-					{LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15" style="width:98%;">
-                <p:column headerText="Nome" style="width:50px; text-align: center">
-                    <h:outputText value="#{modelo.nome}" />
-                </p:column>
-                <p:column>
-                    <p:commandButton icon="ui-icon-check" actionListener="#{buscarModeloMBean.selecionar(modelo)}" />
-                </p:column>
-            </p:dataTable>
-        </h:form>
-        
-    </ui:define>
-     
-    
+		<h:form >
+			<p:dataTable id="dataTable-registros" var="modelo"
+				value="#{buscarModeloMBean.modelos}" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}
+					{LastPageLink} {RowsPerPageDropdown}" paginatorPosition="bottom"
+				rowsPerPageTemplate="5,10" style="width:98%;">
+				<f:facet name="header">
+					<p:outputLabel value="BUSCA DE MODELOS"
+						style="text-align: center !important; font-size: x-large !important;" />
+				</f:facet>
+				<p:column headerText="ID" style="width:50px; text-align: center">
+					<h:outputText value="#{modelo.id}" />
+				</p:column>
+				<p:column headerText="Nome" >
+					<h:outputText value="#{modelo.nome}" />
+				</p:column>
+				<p:column headerText="Marca" >
+					<h:outputText value="#{modelo.marca.nome}" />
+				</p:column>
+				<p:column>
+					<p:commandButton icon="ui-icon-check"
+						actionListener="#{buscarModeloMBean.selecionar(modelo)}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+
+
 </ui:composition>
