@@ -54,6 +54,10 @@ public class CadastroVeiculoMBean {
 
 	public void incluirVeiculo() {
 		admSession.salvarVeiculo(veiculo);
+		
+		// Refresh nos veículos listados
+		veiculos = admSession.listarVeiculosAtivos();
+		novoVeiculo();
 	}
 
 	public void selecionarVeiculo(Veiculo veiculo) {
@@ -62,7 +66,11 @@ public class CadastroVeiculoMBean {
 	}
 
 	public void excluirVeiculo() {
-		admSession.removerVeiculo(this.veiculo);
+		admSession.removerVeiculo(veiculo);
+		
+		// Refresh nos veículos listados
+		veiculos = admSession.listarVeiculosAtivos();
+		novoVeiculo();
 	}
 
 	public Veiculo getVeiculo() {
@@ -86,7 +94,6 @@ public class CadastroVeiculoMBean {
 		opcoes.put("resizable", false);
 		opcoes.put("draggable", true);
 		opcoes.put("modal", true);
-		opcoes.put("position", "center center");
 
 		RequestContext.getCurrentInstance().openDialog("buscarModelo", opcoes, null);
 	}

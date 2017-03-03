@@ -141,7 +141,10 @@
 				<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()"
 					value="Cancelar" />
 				<p:commandButton oncomplete="PF('dlgConfirmarExclusao').hide()"
-					value="Confirmar" action="#{cadastroVeiculoMBean.excluirVeiculo()}"></p:commandButton>
+					value="Confirmar" action="#{cadastroVeiculoMBean.excluirVeiculo()}"
+					update="frmVeiculo" process="@this" ajax="true" >
+					
+					</p:commandButton>
 			</p:confirmDialog>
 		</h:form>
 	</ui:define>

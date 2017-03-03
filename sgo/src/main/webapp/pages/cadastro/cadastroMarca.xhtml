@@ -47,13 +47,14 @@
 							ajax="true"
 							update="@form"
 							alt="botton"
+							actionListener="#{cadastroMarcaMBean.novaMarca()}"
 						/>
 						<p:spacer/><p:spacer/><p:spacer/><p:spacer/>
 						<p:commandButton value="Voltar" onclick="window.history.back();"/>
 					</fieldset>
 				</f:facet>
 			</p:dataTable>
-			<p:dialog header="Inclus&atilde;o de nova Marca" widgetVar="dlgCadastroMarca" modal="true" height="90px" width="350px">
+			<p:dialog header="#{cadastroMarcaMBean.titulo_dialog}" widgetVar="dlgCadastroMarca" modal="true" height="90px" width="350px">
 				<div>
 					<fieldset>
 						<legend>Nome:</legend>
