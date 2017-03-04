@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../../template/layoutBase.xhtml">
+	<ui:define name="corpo">
+		<h:form style="margin:auto; margin-top:4%; margin-left:2%; margin-bottom: 1%;" id="frmCliente">
+			<p:dataTable var="pessoa" id="dtPessoa" value="#{cadastroPessoaMBean.pessoas}" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}
+				{LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10" paginatorPosition="bottom" style="width:98%;">
+				<f:facet name="header">
+						<p:outputLabel value="CADASTRO DE PESSOAS"  style="text-align: center !important; font-size: x-large !important;" />
+				</f:facet>
+				<p:column style="width:50px; text-align: center">
+					<f:facet name="header" >ID</f:facet>
+					<h:outputText value="#{pessoa.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{pessoa.nome}" />
+				</p:column>
+				<p:column headerText="Alterar" style="width:50px; text-align: center;">
+					<p:commandButton
+						icon="ui-icon-pencil"
+						title="Editar Pessoa"
+						ajax="true"
+						actionListener="#{cadastroPessoaMBean.selecionarPesoa(pessoa)}"
+						oncomplete="PF('dlgCadastraPessoa').show();"
+						update="@form"
+					/>
+				</p:column>
+				<p:column headerText="Excluir" style="width:50px; text-align: center;">
+					<p:commandButton
+						icon="ui-icon-circle-close"
+						title="Excluir Pessoa"
+						ajax="true"
+						actionListener="#{cadastroPessoaMBean.selecionarPesoa(pessoa)}" 
+						oncomplete="PF('dlgConfirmarExclusao').show()" 
+						update="@form"
+					/>
+				</p:column>
+				<f:facet name="footer">
+					<fieldset  style=" text-align:center; height:18px; border: none; margin: auto;">
+						<p:commandButton
+							oncomplete="PF('dlgCadastroPessoa').show()" 
+							value="Incluir Pessoa"
+							ajax="true"
+							update="@form"
+						/>
+						<p:spacer/><p:spacer/><p:spacer/><p:spacer/>
+						<p:commandButton value="Voltar" onclick="window.history.back();"/>
+					</fieldset>
+				</f:facet>
+				<p:dialog header="INCLUSS&Atilde;O DE NOVA PESSOA" widgetVar="dlgCadastroPessoa" modal="true" height="90px" width="350px">
+					<p:tab title="Cadastro de Pessoa" style="width:600px; height:370px; margin:auto; margin-top:2%;  margin-bottom:2%;"> 
+						<h:form id="form-cadastro">
+							<h:panelGrid id="panelGrid-campos-form" columns="2"	cellpadding="10">
+		
+								<p:outputLabel value="Nome" for="inputText-nome" />
+								<p:inputText id="inputText-nome" value="#{cadastroPessoaMBean.pessoa.nome}"
+									style="width:300px" maxlength="70" required="true" requiredMessage="O nome é de preenchimento obrigatório" />
+		
+								<p:outputLabel value="Endereço" for="inputText-endereco" />
+								<p:inputText id="inputText-endereco" value="#{cadastroPessoaMBean.pessoa.enderecos}"
+									style="width:400px" maxlength="200" required="true" requiredMessage="O endereço é de preenchimento obrigatório" />
+		
+								<p:spacer />
+								<p:commandButton value="Salvar" id="commandButton-salvar" icon="ui-icon-gear"
+									actionListener="#{cadastroPessoaMBean.salvarPessoa}" update="panelGrid-campos-form" />
+		
+							</h:panelGrid>
+							<p:messages showDetail="true" autoUpdate="true" closable="true"	severity="warn" />
+							<p:messages autoUpdate="true" closable="true" severity="error" />
+							<p:messages showDetail="true" autoUpdate="true" closable="true" severity="info" />
+						</h:form>
+					</p:tab>
+				</p:dialog>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
