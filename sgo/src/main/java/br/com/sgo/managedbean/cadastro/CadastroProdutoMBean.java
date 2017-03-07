@@ -28,7 +28,7 @@ public class CadastroProdutoMBean {
 	public void init(){
 		administrativoSessionFacade = new AdministrativoSessionFacade();
 		produtos = administrativoSessionFacade.listarProdutos();
-		tiposProduto.addAll(Arrays.asList(TipoProduto.values()));
+		tiposProduto = Arrays.asList(TipoProduto.values());
 	}
 
 	public String onFlowProcess(FlowEvent event){
