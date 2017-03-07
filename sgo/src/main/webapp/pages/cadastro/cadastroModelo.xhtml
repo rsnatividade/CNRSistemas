@@ -50,13 +50,14 @@
 							ajax="true"
 							update="@form"
 							alt="botton"
+							actionListener="#{cadastroModeloMBean.novoModelo()}"
 						/>
 						<p:spacer/><p:spacer/><p:spacer/><p:spacer/>
 						<p:commandButton value="Voltar" onclick="window.history.back();"/>
 					</fieldset>
 				</f:facet>
 			</p:dataTable>
-			<p:dialog header="Inclus&atilde;o de novo Modelo" id="dlgCadastraModelo" widgetVar="dlgCadastraModelo" modal="true" height="150px"	width="350px">
+			<p:dialog header="#{cadastroModeloMBean.titulo_dialog}" id="dlgCadastraModelo" widgetVar="dlgCadastraModelo" modal="true" height="150px"	width="350px">
 				<div>
 					<fieldset>
 						<legend>Nome:</legend>
@@ -86,7 +87,7 @@
 					<p:ajax />
 				</div>
 			</p:dialog>
-			<p:confirmDialog header="Inclus&atilde;o de novo Modelo" id="dlgConfirmarExclusao" closable="false"
+			<p:confirmDialog header="Exclusão de Modelo" id="dlgConfirmarExclusao" closable="false"
 				widgetVar="dlgConfirmarExclusao" message="Confirma a exclusão do Modelo #{cadastroModeloMBean.modelo.nome}?" height="30px" width="300px">
 				<div style="float:right; margin-top: 5px; ">
 					<p:commandButton value="Confirmar" ajax="true" update="form-consulta-modelos"

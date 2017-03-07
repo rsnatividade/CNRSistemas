@@ -18,26 +18,36 @@ public class CadastroModeloMBean {
 	private List<Marca> marcas;
 	private Modelo modelo;
 	private AdministrativoSessionFacade administrativoSessionFacade;
+	private String titulo_dialog;
 	
 	@PostConstruct
 	public void init(){
 		administrativoSessionFacade = new AdministrativoSessionFacade();
 		marcas = administrativoSessionFacade.listarMarcasAtivas();
 		modelos = administrativoSessionFacade.listarModelosAtivos();
-		modelo = new Modelo();
+		novoModelo();
 	}
 	
 	public void cadastraModelo(){
 		administrativoSessionFacade.salvarModelo(modelo);
-		modelo = new Modelo();
+		
+		// Refresh nas modelos listados
+		modelos = administrativoSessionFacade.listarModelosAtivos();
+		novoModelo();
 	}
 	
 	public void selecionarModelo(Modelo modelo){
 		this.modelo = modelo;
+		
+		titulo_dialog = new String("Editar Modelo");
 	}
 	
 	public void removerModelo(){
 		administrativoSessionFacade.removerModelo(modelo);
+		
+		// Refresh nas modelos listados
+		modelos = administrativoSessionFacade.listarModelosAtivos();
+		novoModelo();
 	}
 
 	public List<Modelo> getModelos() {
@@ -62,6 +72,16 @@ public class CadastroModeloMBean {
 
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
+	}
+	
+	public void novoModelo() {
+		this.modelo = new Modelo();
+		
+		titulo_dialog = new String("Inclusão de novo Modelo");
+	}
+	
+	public String getTitulo_dialog() {
+		return titulo_dialog;
 	}
 	
 }
