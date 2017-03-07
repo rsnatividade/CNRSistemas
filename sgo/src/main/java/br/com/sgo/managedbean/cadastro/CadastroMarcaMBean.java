@@ -1,6 +1,5 @@
 package br.com.sgo.managedbean.cadastro;
 
-import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,8 +8,6 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.sgo.dao.administrativo.AdministrativoSessionFacade;
 import br.com.sgo.model.administrativo.Marca;
-import br.com.sgo.model.administrativo.Modelo;
-import br.com.sgo.model.administrativo.Veiculo;
 
 @ManagedBean
 @ViewScoped

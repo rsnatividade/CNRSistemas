@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import br.com.sgo.model.administrativo.Marca;
 import br.com.sgo.model.administrativo.Modelo;
 import br.com.sgo.model.administrativo.Veiculo;
+import br.com.sgo.model.operacional.Produto;
 
 public class AdministrativoSessionFacade {
 
@@ -62,5 +63,10 @@ public class AdministrativoSessionFacade {
 	public List<Modelo> listarModelosAtivos(){
 		ModeloDao modeloDao = new ModeloDao(em);
 		return modeloDao.listarModelosAtivos();
+	}
+	
+	public List<Produto> listarProdutos(){
+		ProdutoDao produtoDao = new ProdutoDao(em);
+		return produtoDao.listarProdutosAtivos();
 	}
 }

@@ -8,19 +8,25 @@
 	<ui:define name="corpo">
 		<h2>Cadastro de Produto</h2>
 		<h:form>
-			<p:dataTable>
+			<p:dataTable value="#{cadastroProdutoMBean.produtos}" var="produtos" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}
+				{LastPageLink} {RowsPerPageDropdown}" paginatorPosition="bottom" rowsPerPageTemplate="5,10" style="width:98%;">
 				<f:facet name="header">
 					<fieldset style="text-align: right; border: none;">
 						<p:commandButton icon="ui-icon-plus" oncomplete="PF('dlgCadastroProduto').show()"></p:commandButton>
 					</fieldset>
 				</f:facet>
 				<p:column headerText="ID">
+					<h:outputText value="#{produtos.id}" />
 				</p:column>
 				<p:column headerText="Nome">
+					<h:outputText value="#{produtos.nome}" />
 				</p:column>
 				<p:column headerText="Kit">
+					<h:outputText value="#{produtos.kit ? 'Sim' : 'Não'}" />
 				</p:column>
 				<p:column headerText="Preço">
+					<h:outputText value="#{produtos.valor}" />
 				</p:column>
 				<p:column>
 					<p:commandButton oncomplete="PF('dlgCadastroProduto').show()" icon="ui-icon-pencil" 
@@ -33,44 +39,24 @@
 		
 		<h:form>
 			<p:dialog id="dlgCadastroProduto" widgetVar="dlgCadastroProduto">
-				<p:wizard>
-					<p:tab title="Produto">
+				<p:wizard flowListener="#{cadastroProdutoMBean.onFlowProcess}">
+					<p:tab title="Tipo do Produto">
 						<h:panelGroup>
 							<fieldset>
 								<legend>Tipo do Produto:</legend>
-								<h:inputText value="" />
+								<h:selectOneMenu value="#{cadastroProdutoMBean.tipoProdutoSelecionado}">
+									<f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+									<f:selectItems value="#{cadastroProdutoMBean.tiposProduto}"
+										var="tiposProdutos" itemValue="#{tiposProdutos}" itemLabel="#{tiposProdutos}"/>
+								</h:selectOneMenu>
 							</fieldset>
+						</h:panelGroup>
+					</p:tab>
+					<p:tab title="Dados do Produto">
+						<h:panelGroup>
 							<fieldset>
 								<legend>Nome:</legend>
-								<h:inputText value="" />
-							</fieldset>
-						</h:panelGroup>
-					</p:tab>
-					<p:tab title="Itens Kit">
-						<h:panelGroup>
-							<fieldset>
-								<legend>Item</legend>
-								<h:inputText value="" />
-							</fieldset>
-							<fieldset>
-								<legend>Quantidade</legend>
-								<h:inputText value="" />
-							</fieldset>
-						</h:panelGroup>
-					</p:tab>
-					<p:tab title="Logística">
-						<h:panelGroup>
-							<fieldset>
-								<legend>Estoque Mínimo</legend>
-								<h:inputText value="" />
-							</fieldset>
-							<fieldset>
-								<legend>Preço Compra</legend>
-								<h:inputText value="" />
-							</fieldset>
-							<fieldset>
-								<legend>Margem</legend>
-								<h:inputText value="" />
+								<h:inputText value="#{cadastroProdutoMBean.produto.nome}" />
 							</fieldset>
 						</h:panelGroup>
 					</p:tab>
