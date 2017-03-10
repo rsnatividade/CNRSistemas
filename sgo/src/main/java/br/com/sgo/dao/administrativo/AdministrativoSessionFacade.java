@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 
 import br.com.sgo.model.administrativo.Marca;
 import br.com.sgo.model.administrativo.Modelo;
+import br.com.sgo.model.administrativo.Orcamento;
 import br.com.sgo.model.administrativo.Veiculo;
 import br.com.sgo.model.operacional.Produto;
 
@@ -68,5 +69,20 @@ public class AdministrativoSessionFacade {
 	public List<Produto> listarProdutos(){
 		ProdutoDao produtoDao = new ProdutoDao(em);
 		return produtoDao.listarProdutosAtivos();
+	}
+	
+	public List<Orcamento> listarOrcamentosAbertos() {
+		OrcamentoDao orcamentoDao = new OrcamentoDao(em);
+		return orcamentoDao.listarOrcamentosAbertos();
+	}
+	
+	public void salvarOrcamento(Orcamento orcamento) {
+		OrcamentoDao orcamentoDao = new OrcamentoDao(em);
+		orcamentoDao.salvar(orcamento);
+	}
+	
+	public void removerOrcamento(Orcamento orcamento) {
+		OrcamentoDao orcamentoDao = new OrcamentoDao(em);
+		orcamentoDao.excluir(orcamento);
 	}
 }

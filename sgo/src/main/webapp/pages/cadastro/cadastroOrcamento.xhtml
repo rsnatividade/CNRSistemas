@@ -6,6 +6,66 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="../../template/layoutBase.xhtml">
 	<ui:define name="corpo">
-		<h2>Aqui terá o formulario de cadastro das Marcas</h2>
+		<h:form
+			style="margin:auto; margin-top:4%; margin-left:2%; margin-bottom: 1%;"
+			id="frmOrcamento">
+			<p:dataTable value="#{CadastroOrcamentoMBean.orcamentos}"
+				var="orcamento" id="dtOrcamento" paginator="true" rows="10"
+				paginatorPosition="bottom" rowsPerPageTemplate="5,10"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				style="width:98%;">
+				<f:facet name="header">
+					<p:outputLabel value="CADASTRO DE Orçamentos"
+						style="text-align: center !important; font-size: x-large !important;" />
+				</f:facet>
+				<p:column headerText="ID" style="width:50px; text-align: center;">
+					<h:outputText value="#{orcamento.id}" />
+				</p:column>
+				<p:column headerText="Alterar"
+					style="width:50px; text-align: center;">
+					<p:commandButton icon="ui-icon-pencil" ajax="true"
+						oncomplete="PF('dlgCadastroOrcamento').show()"
+						actionListener="#{cadastroOrcamentoMBean.selecionarOrcamento(orcamento)}"
+						update="frmCadastroOrcamento">
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Excluir"
+					style="width: 50px; text-align: center;">
+					<p:commandButton icon="ui-icon-circle-close"
+						oncomplete="PF('dlgConfirmarExclusao').show()"
+						actionListener="#{cadastroOrcamentoMBean.selecionarOrcamento(orcamento)}"
+						update="frmDialogExclusao">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<h:form id="frmCadastroOrcamento">
+			<p:dialog id="dlgCadastroOrcamento" widgetVar="dlgCadastroOrcamento"
+				modal="true" closable="false" position="center" width="350"
+				header="#{cadastroOrcamentoMBean.titulo_dialog}">
+				<div></div>
+				<div style="float: right;">
+					<p:commandButton
+						action="#{cadastroOrcamentoMBean.incluirOrcamento()}"
+						value="Salvar" oncomplete="PF('dlgCadastroOrcamento').hide()"
+						update=":frmOrcamento"></p:commandButton>
+					<p:commandButton onclick="PF('dlgCadastroOrcamento').hide()"
+						value="Cancelar"></p:commandButton>
+				</div>
+			</p:dialog>
+		</h:form>
+		<h:form id="frmDialogExclusao">
+			<p:confirmDialog id="dlgConfirmarExclusao"
+				header="Exclusão de Orçamento" widgetVar="dlgConfirmarExclusao"
+				closable="false"
+				message="Confirma a Exclusão do Orçamento '#{cadastroOrcamentoMBean.orcamento.id}' ?">
+				<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()"
+					value="Cancelar" />
+				<p:commandButton oncomplete="PF('dlgConfirmarExclusao').hide()"
+					value="Confirmar" action="#{cadastroOrcamentoMBean.excluirOrcamento()}"
+					update="frmOrcamento" process="@this" ajax="true">
+				</p:commandButton>
+			</p:confirmDialog>
+		</h:form>
 	</ui:define>
 </ui:composition>
