@@ -59,9 +59,10 @@
 					<fieldset
 						style="text-align: center; height: 18px; border: none; margin: auto;">
 						<p:commandButton oncomplete="PF('dlgCadastroVeiculo').show()"
-							value="Incluir Veículo" ajax="true" update="frmCadastroVeiculo" alt="botton"
+							value="Incluir Veículo" ajax="true" update="frmCadastroVeiculo"
+							alt="botton"
 							actionListener="#{cadastroVeiculoMBean.novoVeiculo()}">
-					
+
 						</p:commandButton>
 						<p:spacer />
 						<p:spacer />
@@ -142,9 +143,9 @@
 					value="Cancelar" />
 				<p:commandButton oncomplete="PF('dlgConfirmarExclusao').hide()"
 					value="Confirmar" action="#{cadastroVeiculoMBean.excluirVeiculo()}"
-					update="frmVeiculo" process="@this" ajax="true" >
-					
-					</p:commandButton>
+					update="frmVeiculo" process="@this" ajax="true">
+
+				</p:commandButton>
 			</p:confirmDialog>
 		</h:form>
 	</ui:define>

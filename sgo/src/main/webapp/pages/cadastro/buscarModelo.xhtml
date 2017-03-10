@@ -7,7 +7,7 @@
 	template="../../template/layoutBase2.xhtml">
 
 	<ui:define name="corpo">
-		<h:form >
+		<h:form>
 			<p:dataTable id="dataTable-registros" var="modelo"
 				value="#{buscarModeloMBean.modelos}" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}
@@ -17,16 +17,16 @@
 					<p:outputLabel value="BUSCA DE MODELOS"
 						style="text-align: center !important; font-size: x-large !important;" />
 				</f:facet>
-				<p:column headerText="ID" style="width:50px; text-align: center">
+				<p:column headerText="ID" style="width:75px; text-align: center" filterBy="#{modelo.id}" filterMatchMode="contains"> 
 					<h:outputText value="#{modelo.id}" />
 				</p:column>
-				<p:column headerText="Nome" >
+				<p:column headerText="Nome" filterBy="#{modelo.nome}" filterMatchMode="contains">
 					<h:outputText value="#{modelo.nome}" />
 				</p:column>
-				<p:column headerText="Marca" >
+				<p:column headerText="Marca" filterBy="#{modelo.marca.nome}" filterMatchMode="contains">
 					<h:outputText value="#{modelo.marca.nome}" />
 				</p:column>
-				<p:column>
+				<p:column style="width:30px; text-align: center">
 					<p:commandButton icon="ui-icon-check"
 						actionListener="#{buscarModeloMBean.selecionar(modelo)}" />
 				</p:column>
