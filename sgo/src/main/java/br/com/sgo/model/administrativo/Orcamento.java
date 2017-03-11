@@ -1,7 +1,7 @@
 package br.com.sgo.model.administrativo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -37,10 +37,14 @@ public class Orcamento implements Serializable {
 	@JoinColumn(name="id_colaborador")
 	private Colaborador colaborador;
 	
+	@ManyToOne
+	@JoinColumn(name="id_veiculo")
+	private Veiculo veiculo;
+
 	@Column(name="dt_chegada")
 	private Date data_chegada;
 	
-	@Column(name="tx_status")
+	@Column(name="id_status")
 	private Status status;
 	
 	@Column(name="tx_descricao_problema")
@@ -94,5 +98,12 @@ public class Orcamento implements Serializable {
 		this.descricao = descricao;
 	}
 	
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
     
 }

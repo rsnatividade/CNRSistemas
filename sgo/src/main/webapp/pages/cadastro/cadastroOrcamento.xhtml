@@ -15,11 +15,26 @@
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				style="width:98%;">
 				<f:facet name="header">
-					<p:outputLabel value="CADASTRO DE Orçamentos"
+					<p:outputLabel value="CADASTRO DE ORÇAMENTOS"
 						style="text-align: center !important; font-size: x-large !important;" />
 				</f:facet>
 				<p:column headerText="ID" style="width:50px; text-align: center;">
 					<h:outputText value="#{orcamento.id}" />
+				</p:column>
+				<p:column headerText="Data da Chegada" style="text-align: center;">
+					<h:outputText value="#{orcamento.dt_chegada}" />
+				</p:column>
+				<p:column headerText="Status" style="text-align: center;">
+					<h:outputText value="#{orcamento.id_status}" />
+				</p:column>
+				<p:column headerText="Veiculo" style="text-align: center;">
+					<h:outputText value="#{orcamento.veiculo.placa}" />
+				</p:column>
+				<p:column headerText="Cliente" style="text-align: center;">
+					<h:outputText value="" />
+				</p:column>
+				<p:column headerText="Atendente" style="text-align: center;">
+					<h:outputText value="" />
 				</p:column>
 				<p:column headerText="Alterar"
 					style="width:50px; text-align: center;">
@@ -37,6 +52,19 @@
 						update="frmDialogExclusao">
 					</p:commandButton>
 				</p:column>
+				<f:facet name="footer">
+					<fieldset
+						style="text-align: center; height: 18px; border: none; margin: auto;">
+						<p:commandButton oncomplete="PF('dlgCadastraOrcamento').show()"
+							value="Incluir Orcamento" ajax="true" update="@form" alt="botton"
+							actionListener="#{cadastroOrcamentoMBean.novoOrcamento()}" />
+						<p:spacer />
+						<p:spacer />
+						<p:spacer />
+						<p:spacer />
+						<p:commandButton value="Voltar" onclick="window.history.back();" />
+					</fieldset>
+				</f:facet>
 			</p:dataTable>
 		</h:form>
 		<h:form id="frmCadastroOrcamento">
@@ -62,7 +90,8 @@
 				<p:commandButton onclick="PF('dlgConfirmarExclusao').hide()"
 					value="Cancelar" />
 				<p:commandButton oncomplete="PF('dlgConfirmarExclusao').hide()"
-					value="Confirmar" action="#{cadastroOrcamentoMBean.excluirOrcamento()}"
+					value="Confirmar"
+					action="#{cadastroOrcamentoMBean.excluirOrcamento()}"
 					update="frmOrcamento" process="@this" ajax="true">
 				</p:commandButton>
 			</p:confirmDialog>
