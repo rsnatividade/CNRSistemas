@@ -1,10 +1,13 @@
 package br.com.sgo.model.operacional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue(value="KIT")
@@ -12,7 +15,8 @@ public class Kit extends Produto {
 
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne(targetEntity=Produto.class)
+	@OneToMany
+	@JoinColumn(name="itens")
 	private List<Produto> itens;
 
 	public List<Produto> getItens() {
@@ -24,11 +28,16 @@ public class Kit extends Produto {
 	}
 
 	public void adicionarItem(Produto item){
+		if(itens == null){
+			itens = new ArrayList<Produto>();
+		}
 		itens.add(item);
 	}
 	
 	public void removerItem(Produto item){
-		itens.remove(item);
+		if(itens != null){
+			itens.remove(item);
+		}
 	}
 	
 	public Produto getProduto(int index){

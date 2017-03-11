@@ -7,21 +7,36 @@ import br.com.sgo.model.operacional.Servico;
 
 public enum TipoProduto {
 
-	SERVICO{
+	SERVICO("Serviço"){
 		public Class<Servico> criarProduto(){
 			return Servico.class;
 		}
 	},
-	MATERIAL{
+	MATERIAL("Material"){
 		public Class<Material> criarProduto(){
 			return Material.class;
 		}
 	},
-	KIT{
+	KIT("Kit"){
 		public Class<Kit> criarProduto(){
 			return Kit.class;
 		}
 	};
+
+	private String nome;
 	
 	public abstract Class<? extends Produto> criarProduto();
+	
+	private TipoProduto(String nome) {
+		this.nome = nome;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 }

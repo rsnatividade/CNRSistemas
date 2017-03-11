@@ -85,4 +85,9 @@ public class AdministrativoSessionFacade {
 		OrcamentoDao orcamentoDao = new OrcamentoDao(em);
 		orcamentoDao.excluir(orcamento);
 	}
+	
+	public void salvarProduto(Produto produto){
+		ProdutoDao produtoDao = new ProdutoDao(em);
+		produtoDao.salvar(produto);
+	}
 }

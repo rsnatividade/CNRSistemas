@@ -7,7 +7,7 @@
 	template="../../template/layoutBase.xhtml">
 	<ui:define name="corpo">
 		<h2>Cadastro de Produto</h2>
-		<h:form>
+		<h:form id="frmCadastroProduto">
 			<p:dataTable value="#{cadastroProdutoMBean.produtos}" var="produtos" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink}
 				{LastPageLink} {RowsPerPageDropdown}" paginatorPosition="bottom" rowsPerPageTemplate="5,10" style="width:98%;">
@@ -35,12 +35,10 @@
 						update="@form" />
 				</p:column>
 			</p:dataTable>
-		</h:form>
 		
-		<h:form>
-			<p:dialog id="dlgCadastroProduto" widgetVar="dlgCadastroProduto">
+			<p:dialog id="dlgCadastroProduto" widgetVar="dlgCadastroProduto" width="600" height="450">
 				<p:wizard flowListener="#{cadastroProdutoMBean.onFlowProcess}">
-					<p:tab title="Tipo do Produto">
+					<p:tab title="Tipo do Produto" id="tipoProduto">
 						<h:panelGroup>
 							<fieldset>
 								<legend>Tipo do Produto:</legend>
@@ -52,19 +50,33 @@
 							</fieldset>
 						</h:panelGroup>
 					</p:tab>
-					<p:tab title="Dados do Produto">
+					<p:tab title="Dados do Produto" id="dadosProduto">
 						<h:panelGroup>
 							<fieldset>
 								<legend>Nome:</legend>
-								<h:inputText value="#{cadastroProdutoMBean.produto.nome}" />
+								<h:inputText value="#{cadastroProdutoMBean.produto.nome}" immediate="true"/>
 							</fieldset>
+							<fieldset>
+								<legend>Valor:</legend>
+								<h:inputText value="#{cadastroProdutoMBean.produto.valor}" immediate="true"/>
+							</fieldset>
+							<h:panelGroup rendered="#{cadastroProdutoMBean.tipoProdutoSelecionado.nome eq 'Kit'}">
+								<fieldset>
+									<p:pickList showSourceFilter="true" value="#{cadastroProdutoMBean.produtoDualListModel}"
+											var="produtoModel" itemValue="#{produtoModel}" itemLabel="#{produtoModel.nome}"
+											converter="produtoConverter">
+									</p:pickList>
+								</fieldset>
+							</h:panelGroup>
 						</h:panelGroup>
+					</p:tab>
+					<p:tab title="Salvar" id="salvar">
+						<p:commandButton value="Salvar" action="#{cadastroProdutoMBean.salvarProduto()}"
+								process="@this, @form" update="@form" oncomplete="PF('dlgCadastroProduto').hide"></p:commandButton>
 					</p:tab>
 				</p:wizard>
 			</p:dialog>
-		</h:form>
 
-		<h:form>
 			<p:confirmDialog id="dlgConfirmarExclusao" widgetVar="dlgConfirmarExclusao">
 			</p:confirmDialog>
 		</h:form>
