@@ -88,4 +88,8 @@ public class ConsultarPessoaController implements Serializable {
 		this.pessoas.remove(pessoaModel);
 
 	}
+	
+	public String iniciarCadastro(){
+		return "/pages/gerencial/consultarPessoa.xhtml?faces-redirect=true";
+	}
 }
