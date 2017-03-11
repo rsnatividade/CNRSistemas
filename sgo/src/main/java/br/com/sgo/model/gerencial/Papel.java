@@ -29,6 +29,10 @@ public abstract class Papel implements Serializable{
 	private String descricao;
 	
 	@ManyToOne
+	@JoinColumn(name="id_pessoa")
+	private Pessoa pessoa;
+	
+	@ManyToOne
 	@JoinColumn(name="id_cargo")
 	private Cargo cargo;
 
@@ -49,6 +53,12 @@ public abstract class Papel implements Serializable{
 	}
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
+	}
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 	
 }

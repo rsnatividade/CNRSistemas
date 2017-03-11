@@ -41,13 +41,13 @@ values
   
 insert into ger_cargo (id_cargo, tx_descricao) values (1, 'Mecânico');
 
---insert into ger_papel (dtype, id_papel, tx_descricao, id_cargo) values ('CLIENTE', 1, 'Papel', 1);   
-insert into ger_papel (dtype, id_papel, tx_descricao, id_cargo) values ('COLABORADOR', 1, 'Papel', 1);   
+insert into ger_papel (dtype, id_papel, tx_descricao, id_pessoa, id_cargo) values ('CLIENTE', 1, 'Papel', 1, null);   
+insert into ger_papel (dtype, id_papel, tx_descricao, id_pessoa, id_cargo) values ('COLABORADOR', 2, 'Papel', 2, 1);   
   
 insert into adm_orcamento 
-  (id_orcamento, dt_chegada, tx_descricao_problema, id_status, id_cliente, id_colaborador) 
+  (id_orcamento, dt_chegada, tx_descricao_problema, id_status, id_cliente, id_colaborador, id_veiculo) 
 values 
-  (1, '2017-01-01', 'Teste', 1, 1, 2);
+  (1, '2017-01-01', 'Teste', 1, 1, 2, 1);
 	
 	
 select usuarioent0_.id_usuario as id_usuar1_20_, usuarioent0_.ds_senha as ds_senha2_20_, usuarioent0_.ds_login as ds_login3_20_ from tb_usuario	
