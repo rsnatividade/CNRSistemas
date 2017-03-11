@@ -8,6 +8,86 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="../template/layoutBase.xhtml">
 
-	<ui:define name="corpo"/>	
+	<ui:define name="corpo">
+	<!-- <p:steps id="testSteps" activeIndex="0" styleClass="custom" readonly="false">
+	<p:menuitem value="Step 1" actionListener="/pages/home.xhtml" update="pnl" process="@all"/>
+	<p:menuitem value="Step 2" actionListener="#{summaryView.changeStep(1)}" update="pnl" process="@all"/>
+	<p:menuitem value="Step 3" actionListener="#{summaryView.changeStep(2)}" update="pnl" process="@all"/>
+	<p:menuitem value="Step 4" actionListener="#{summaryView.changeStep(3)}" update="pnl" process="@all"/>
+</p:steps>
+	
+	<h3 style="margin-top:0">Basic</h3>
+	<p:steps activeIndex="1">
+	    <p:menuitem value="Home"		icon="/resources/imagens/home.png"			url="/pages/home.xhtml" />
+	<p:menuitem value="Cadastros"	icon="/resources/imagens/cadastro.png"		url="/pages/cadastro/menuCadastro.xhtml" />
+	<p:menuitem value="Finanças"	icon="/resources/imagens/financas.png"		url="/pages/financas/menuFinancas.xhtml" />
+	<p:menuitem value="Orçamento"	icon="/resources/imagens/orcamento.png"		url="/pages/operacional/menuOperacional.xhtml" />
+	<p:menuitem value="Compras"		icon="/resources/imagens/compras.png"		url="/pages/compras/menuCompras.xhtml" />
+	<p:menuitem value="Gerencial"	icon="/resources/imagens/gerencial.png"		url="/pages/gerencial/menuGerencial.xhtml" />
+	<p:menuitem value="Relatórios"	icon="/resources/imagens/relatorio.png"		url="/pages/relatorios/menuRelatorios.xhtml" />
+	<p:menuitem value="Sair"		icon="/resources/imagens/sair.png"			url="" />
+	</p:steps>
+ 
+<h3>Interactive</h3>
+<p:steps activeIndex="8" styleClass="custom" readonly="false">
+	<p:menuitem value="Home"		icon="/resources/imagens/home.png"			url="/pages/home.xhtml" />
+	<p:menuitem value="Cadastros"	icon="/resources/imagens/cadastro.png"		url="/pages/cadastro/menuCadastro.xhtml" />
+	<p:menuitem value="Finanças"	icon="/resources/imagens/financas.png"		url="/pages/financas/menuFinancas.xhtml" />
+	<p:menuitem value="Orçamento"	icon="/resources/imagens/orcamento.png"		url="/pages/operacional/menuOperacional.xhtml" />
+	<p:menuitem value="Compras"		icon="/resources/imagens/compras.png"		url="/pages/compras/menuCompras.xhtml" />
+	<p:menuitem value="Gerencial"	icon="/resources/imagens/gerencial.png"		url="/pages/gerencial/menuGerencial.xhtml" />
+	<p:menuitem value="Relatórios"	icon="/resources/imagens/relatorio.png"		url="/pages/relatorios/menuRelatorios.xhtml" />
+	<p:menuitem value="Sair"		icon="/resources/imagens/sair.png"			url="" />
+</p:steps> -->
+
+		<div class="pagina">
+			<div class="container">
+				<div class="linha">
+					<div class="tile amarelo">
+						<img src="../resources/imagens/home.png" alt="Home"  /> <span>Home</span>
+					</div>
+					<div class="tile azul">
+						<img src="../resources/imagens/cadastro.png" alt="Cadastros" /> <span>Favoritos</span>
+					</div>
+					<div class="tile tileLargo vermelho">
+						<img src="../resources/imagens/financas.png" alt="Finanças" /> <span>Navegador</span>
+					</div>
+					<div class="tile verde">
+						<img src="../resources/imagens/orcamento.png" alt="Orçamento" /> <span>Imagens</span>
+					</div>
+					<div class="tile tileLargo amarelo">
+						<img src="../resources/imagens/compras.png" alt="Compras" /> <span>Ajuda</span>
+					</div>
+				</div>
+				<div class="linha">
+					<div class="tile tileLargo amarelo">
+						<img src="../resources/imagens/gerencial.png" alt="Gerencial" /> <span>Arquivos</span>
+					</div>
+					<div class="tile azul">
+						<img src="../resources/imagens/relatorio.png" alt="Relatórios" /> <span>E-mail</span>
+					</div>
+					<div class="tile verde">
+						<img src="../resources/imagens/sair.png" alt="Sair" /> <span>Camera</span>
+					</div>
+					<div class="tile vermelho">
+						<img src="imagens/music.png" alt="Música" /> <span>Música</span>
+					</div>
+					<div class="tile tileLargo verde">
+						<img src="imagens/note.png" alt="Notas" /> <span>Notas</span>
+					</div>
+				</div>
+				<div class="linha">
+					<div class="tile amarelo">
+						<img src="imagens/sun.png" alt="Clima" /> <span>Clima</span>
+					</div>
+					<div class="tile verde"></div>
+					<div class="tile vermelho"></div>
+					<div class="tile tileLargo verde"></div>
+					<div class="tile azul"></div>
+					<div class="tile verde"></div>
+				</div>
+			</div>
+		</div>
+	</ui:define>	
 	
 </ui:composition>
